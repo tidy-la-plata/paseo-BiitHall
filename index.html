@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiitHall — Paseo Comercial de Emprendedores · La Plata</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0D0D0D;
+    --white: #F5F2EC;
+    --accent: #cf278e;
+    --accent-dark: #a01f6e;
+    --mid: #1A1A1A;
+    --card-bg: #141414;
+    --muted: #888;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(13,13,13,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+    color: rgba(245,242,236,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--accent) !important;
+    color: var(--white) !important;
+    font-family: 'Syne', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.04em;
+    padding: 0.55rem 1.3rem !important;
+    border-radius: 100px !important;
+  }
+  .nav-cta:hover { opacity: 0.82; color: var(--white) !important; }
+
+  @media (max-width: 700px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10rem 5% 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(207,39,142,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207,39,142,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-bg-glow {
+    position: absolute; top: -10%; right: -15%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(207,39,142,0.13) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    max-width: 860px;
+    margin-bottom: 1.8rem;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: rgba(245,242,236,0.65);
+    max-width: 520px;
+    margin-bottom: 2.8rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2.2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 40px rgba(207,39,142,0.28);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 50px rgba(207,39,142,0.38); }
+
+  .btn-outline {
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.18);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-badge {
+    margin-top: 4rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-stat { display: flex; flex-direction: column; }
+  .hero-stat strong {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat span { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+  .hero-divider { width: 1px; height: 40px; background: var(--border); align-self: center; }
+
+  /* TICKER */
+  .ticker { overflow: hidden; padding: 1rem 0; background: var(--accent); white-space: nowrap; }
+  .ticker-inner { display: inline-flex; animation: ticker 35s linear infinite; }
+  .ticker-inner span {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    padding: 0 2.5rem;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTIONS */
+  section { padding: 6rem 5%; }
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  .section-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(245,242,236,0.55);
+    max-width: 500px;
+    line-height: 1.7;
+  }
+
+  /* PROPUESTA */
+  .propuesta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 4rem;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .prop-card { background: var(--card-bg); padding: 2.5rem; transition: background 0.3s; }
+  .prop-card:hover { background: #1e1e1e; }
+  .prop-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: rgba(207,39,142,0.13);
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+  }
+  .prop-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(207,39,142,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+  .prop-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .prop-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; }
+  .prop-desc { font-size: 0.9rem; color: rgba(245,242,236,0.5); line-height: 1.7; }
+
+  /* MARCAS */
+  .marcas-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 3rem 6rem; margin-top: 3.5rem; padding: 3rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .marca-item { display: flex; align-items: center; justify-content: center; color: rgba(245,242,236,0.35); transition: color 0.3s, transform 0.3s; cursor: default; }
+  .marca-item:hover { color: var(--white); transform: translateY(-4px); }
+  .marca-item svg { fill: currentColor; height: 44px; width: auto; }
+  .marca-text-havanna { font-family: 'Georgia', Times, serif; font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+  .marca-text-cinema { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.8rem; text-transform: uppercase; line-height: 1.1; text-align: center; }
+  .marca-text-cinema span { display: block; font-size: 0.75rem; letter-spacing: 0.25em; color: var(--accent); font-weight: 600; }
+
+  /* LOCALES */
+  .locales-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .disponibilidad-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(207,39,142,0.1);
+    border: 1px solid rgba(207,39,142,0.25);
+    border-radius: 100px;
+    padding: 0.5rem 1.1rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .dot-live {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+
+  .locales-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  .local-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .local-card:hover { border-color: rgba(207,39,142,0.35); transform: translateY(-4px); }
+
+  .local-header { padding: 1.5rem 1.8rem 0; display: flex; justify-content: space-between; align-items: flex-start; }
+  .local-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+
+  .badge-disponible { font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 100px; }
+  .badge-libre { background: rgba(0,200,120,0.12); color: #00c878; }
+  .badge-ocupado { background: rgba(255,160,80,0.12); color: #ffa050; }
+  .badge-reservado { background: rgba(207,39,142,0.12); color: var(--accent); }
+
+  .local-body { padding: 1rem 1.8rem 1.8rem; }
+  .local-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; line-height: 1.3; }
+  .local-rubro { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 1rem; }
+
+  .local-attrs { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.4rem; }
+  .attr-row { display: flex; justify-content: space-between; font-size: 0.82rem; border-bottom: 1px solid var(--border); padding-bottom: 0.45rem; }
+  .attr-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .attr-key { color: var(--muted); }
+  .attr-val { font-weight: 500; color: var(--white); }
+
+  .local-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
+  .local-tag { font-size: 0.72rem; font-family: 'Syne', sans-serif; font-weight: 600; letter-spacing: 0.05em; padding: 0.2rem 0.65rem; border-radius: 100px; background: rgba(255,255,255,0.05); color: rgba(245,242,236,0.5); border: 1px solid var(--border); }
+
+  .local-cta { width: 100%; padding: 0.7rem; border-radius: 10px; border: 1px solid rgba(207,39,142,0.35); background: transparent; color: var(--accent); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .local-cta:hover { background: var(--accent); color: var(--white); }
+  .local-cta:disabled { border-color: var(--border); color: var(--muted); cursor: not-allowed; }
+  .local-cta:disabled:hover { background: transparent; color: var(--muted); }
+
+  /* TOUR */
+  .tour-wrapper { margin-top: 3rem; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
+  .tour-iframe-wrap { position: relative; width: 100%; padding-bottom: 52%; background: #0a0a0a; }
+  .tour-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; cursor: pointer; transition: background 0.3s; }
+  .tour-placeholder:hover { background: rgba(207,39,142,0.04); }
+  .tour-icon-wrap { width: 72px; height: 72px; border-radius: 50%; background: rgba(207,39,142,0.12); border: 1px solid rgba(207,39,142,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; transition: background 0.3s; }
+  .tour-placeholder:hover .tour-icon-wrap { background: rgba(207,39,142,0.22); }
+  .tour-icon-wrap svg { width: 32px; height: 32px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .tour-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
+  .tour-sublabel { font-size: 0.82rem; color: var(--muted); }
+  .tour-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+  .tour-thumb { padding: 1.2rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 0.75rem; }
+  .tour-thumb:last-child { border-right: none; }
+  .tour-thumb:hover { background: rgba(207,39,142,0.06); }
+  .tour-thumb.active { background: rgba(207,39,142,0.08); }
+  .tour-thumb-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(207,39,142,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tour-thumb-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .tour-thumb-label { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; }
+  .tour-thumb-sub { font-size: 0.72rem; color: var(--muted); }
+
+  /* INQUILINOS */
+  .inquilinos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .inquilino-card { background: var(--card-bg); border-radius: 20px; padding: 2.2rem; border: 1px solid var(--border); position: relative; overflow: hidden; transition: border-color 0.3s; }
+  .inquilino-card:hover { border-color: rgba(207,39,142,0.3); }
+  .inquilino-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); opacity: 0; transition: opacity 0.3s; }
+  .inquilino-card:hover::before { opacity: 1; }
+  .inq-icon { width: 52px; height: 52px; border-radius: 14px; background: rgba(207,39,142,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+  .inq-icon svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .inq-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .inq-desc { font-size: 0.88rem; color: rgba(245,242,236,0.5); line-height: 1.7; margin-bottom: 1.4rem; }
+  .inq-link { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+  .inq-link:hover { gap: 0.7rem; }
+
+  /* CONTACTO */
+  .contacto-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+  .contacto-left .checklist { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .contacto-left .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: rgba(245,242,236,0.75); }
+  .check-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(207,39,142,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .check-icon svg { width: 11px; height: 11px; stroke: var(--accent); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  .urgencia-bar { margin-top: 2rem; background: var(--card-bg); border-radius: 12px; padding: 1.2rem 1.5rem; border: 1px solid var(--border); }
+  .urgencia-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.7rem; display: flex; justify-content: space-between; }
+  .urgencia-label span { color: var(--accent); font-weight: 600; }
+  .progress-bar { height: 6px; background: rgba(255,255,255,0.07); border-radius: 100px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 73%; background: var(--accent); border-radius: 100px; }
+
+  .form-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; }
+  .form-eyebrow { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+  .form-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.8rem; }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 500; color: rgba(245,242,236,0.55); margin-bottom: 0.45rem; letter-spacing: 0.02em; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 0.75rem 1rem; outline: none; transition: border-color 0.2s; appearance: none; resize: none; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(245,242,236,0.22); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: rgba(207,39,142,0.45); }
+  .form-group select option { background: #1a1a1a; color: var(--white); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-submit { width: 100%; background: var(--accent); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; padding: 0.95rem; border-radius: 10px; border: none; cursor: pointer; margin-top: 0.6rem; transition: opacity 0.2s, transform 0.2s; }
+  .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+  .form-note { text-align: center; font-size: 0.75rem; color: rgba(245,242,236,0.28); margin-top: 1rem; }
+
+  .success-msg { display: none; text-align: center; padding: 1rem 0; }
+  .success-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(207,39,142,0.15); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; }
+  .success-icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .success-msg h3 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .success-msg p { font-size: 0.88rem; color: rgba(245,242,236,0.5); line-height: 1.6; }
+
+  /* UBICACION */
+  .ubicacion-row { display: flex; gap: 3rem; align-items: flex-start; margin-top: 3rem; flex-wrap: wrap; }
+  .ubicacion-info { flex: 1; min-width: 260px; }
+  .ubicacion-info p { font-size: 1rem; color: rgba(245,242,236,0.6); line-height: 1.7; }
+  .ubicacion-info strong { color: var(--white); }
+  .ubicacion-detail { display: flex; align-items: flex-start; gap: 0.75rem; margin-top: 1.5rem; }
+  .ubicacion-detail svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 2px; }
+  .ubicacion-detail p { font-size: 0.88rem; color: rgba(245,242,236,0.55); }
+  .map-placeholder { flex: 1.2; min-width: 300px; min-height: 240px; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: rgba(245,242,236,0.25); font-size: 0.85rem; }
+  .map-placeholder svg { width: 32px; height: 32px; stroke: rgba(207,39,142,0.3); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 2.5rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: -0.02em; color: var(--white); }
+  .footer-logo span { color: var(--accent); }
+  footer p { font-size: 0.8rem; color: rgba(245,242,236,0.3); }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 200; align-items: center; justify-content: center; padding: 5%; backdrop-filter: blur(6px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; max-width: 520px; width: 100%; position: relative; animation: fadeUp 0.3s ease both; }
+  .modal-close { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(255,255,255,0.06); border: none; color: var(--white); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .modal-close:hover { background: rgba(255,255,255,0.12); }
+  .modal-eyebrow { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .modal-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero h1 { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-badge { animation: fadeUp 0.6s 0.4s ease both; }
+
+  @media (max-width: 960px) {
+    .propuesta-grid { grid-template-columns: 1fr; }
+    .locales-grid { grid-template-columns: 1fr 1fr; }
+    .inquilinos-grid { grid-template-columns: 1fr; }
+    .contacto-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+    .tour-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 1rem 5%; }
+    .hero { padding: 9rem 5% 5rem; }
+    section { padding: 4rem 5%; }
+    .locales-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-card { padding: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Biit<span>Hall</span></a>
+  <div class="nav-links">
+    <a href="#locales">Locales</a>
+    <a href="#tour">Tour 360°</a>
+    <a href="#inquilinos">Inquilinos</a>
+    <a href="#contacto" class="nav-cta">Lista de espera</a>
+  </div>
+</nav>
+
+<section class="hero" id="inicio">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-glow"></div>
+
+  <p class="hero-eyebrow">Paseo Comercial · La Plata</p>
+  <h1>El lugar donde los<br><em>emprendedores</em><br>construyen marca</h1>
+  <p class="hero-sub">BiitHall es el paseo comercial de nueva generación en La Plata. Locales para negocios innovadores, con comunidad real, tráfico constante y visibilidad en el centro de la ciudad.</p>
+
+  <div class="hero-actions">
+    <a href="#contacto" class="btn-primary">Quiero un local</a>
+    <a href="#locales" class="btn-outline">Ver disponibilidad</a>
+  </div>
+
+  <div class="hero-badge">
+    <div class="hero-stat"><strong>18</strong><span>Locales en total</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><strong>5</strong><span>Disponibles hoy</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><strong>100%</strong><span>Emprendedores</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><strong>Centro</strong><span>La Plata</span></div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span>Gastronomía</span><span>·</span><span>Indumentaria</span><span>·</span><span>Tecnología</span><span>·</span><span>Diseño y arte</span><span>·</span><span>Cosmética</span><span>·</span><span>Decoración</span><span>·</span><span>Servicios creativos</span><span>·</span><span>Salud y bienestar</span><span>·</span><span>Fotografía</span><span>·</span>
+    <span>Gastronomía</span><span>·</span><span>Indumentaria</span><span>·</span><span>Tecnología</span><span>·</span><span>Diseño y arte</span><span>·</span><span>Cosmética</span><span>·</span><span>Decoración</span><span>·</span><span>Servicios creativos</span><span>·</span><span>Salud y bienestar</span><span>·</span><span>Fotografía</span><span>·</span>
+  </div>
+</div>
+
+<section id="propuesta">
+  <p class="section-label">Por qué BiitHall</p>
+  <h2 class="section-title">Un paseo pensado para<br>negocios que crecen</h2>
+  <p class="section-sub">No es una galería tradicional. Es un ecosistema donde cada local potencia a los demás.</p>
+
+  <div class="propuesta-grid">
+    <div class="prop-card">
+      <div class="prop-number">01</div>
+      <div class="prop-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3 class="prop-title">Comunidad de emprendedores</h3>
+      <p class="prop-desc">Todos los locales son proyectos genuinos. El tráfico que genera un local beneficia a los demás. Una red de negocios reales bajo el mismo techo.</p>
+    </div>
+    <div class="prop-card">
+      <div class="prop-number">02</div>
+      <div class="prop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h3 class="prop-title">Espacios a medida</h3>
+      <p class="prop-desc">Desde locales de 12 m² hasta plantas de 45 m². Ambientes con identidad propia, listos para personalizar y abrir en tiempo récord.</p>
+    </div>
+    <div class="prop-card">
+      <div class="prop-number">03</div>
+      <div class="prop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <h3 class="prop-title">Visibilidad digital incluida</h3>
+      <p class="prop-desc">Cada inquilino tiene presencia en la web y redes de BiitHall. Tu local visible también online, sin costo adicional.</p>
+    </div>
+    <div class="prop-card">
+      <div class="prop-number">04</div>
+      <div class="prop-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <h3 class="prop-title">Ubicación estratégica</h3>
+      <p class="prop-desc">En pleno centro de La Plata, con alto tráfico peatonal, acceso en transporte público y estacionamiento cercano. Donde la gente ya pasa.</p>
+    </div>
+  </div>
+</section>
+
+<section id="marcas">
+  <p class="section-label">Confían en nosotros</p>
+  <h2 class="section-title">Marcas que ya nos eligieron</h2>
+  <p class="section-sub">Empresas de primer nivel ya forman parte de la experiencia BiitHall.</p>
+
+  <div class="marcas-wrapper">
+    <div class="marca-item">
+      <div class="marca-text-havanna">Havanna</div>
+    </div>
+    <div class="marca-item" title="Apple">
+      <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+    </div>
+    <div class="marca-item">
+      <div class="marca-text-cinema">Cinema<span>Rocha</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="locales" style="background: var(--mid);">
+  <div class="locales-header">
+    <div>
+      <p class="section-label">Disponibilidad</p>
+      <h2 class="section-title">Locales en BiitHall</h2>
+    </div>
+    <div class="disponibilidad-badge">
+      <div class="dot-live"></div>
+      5 locales disponibles ahora
+    </div>
+  </div>
+
+  <div class="locales-grid">
+
+    <div class="local-card">
+      <div class="local-header">
+        <span class="local-num">Local 01</span>
+        <span class="badge-disponible badge-libre">Disponible</span>
+      </div>
+      <div class="local-body">
+        <h3 class="local-title">Planta esquina · Nivel 0</h3>
+        <p class="local-rubro">Gastronomía / Cafetería</p>
+        <div class="local-attrs">
+          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">38 m²</span></div>
+          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">6,5 m</span></div>
+          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">3,2 m</span></div>
+          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Gas + ventilación</span></div>
+        </div>
+        <div class="local-tags">
+          <span class="local-tag">Esquina</span><span class="local-tag">Ventana al paseo</span><span class="local-tag">Gas industrial</span><span class="local-tag">Alta visibilidad</span>
+        </div>
+        <button class="local-cta" onclick="openModal('Local 01 — Esquina Nivel 0', '38 m²')">Consultar disponibilidad</button>
+      </div>
+    </div>
+
+    <div class="local-card">
+      <div class="local-header">
+        <span class="local-num">Local 02</span>
+        <span class="badge-disponible badge-ocupado">Ocupado</span>
+      </div>
+      <div class="local-body">
+        <h3 class="local-title">Interior central · Nivel 0</h3>
+        <p class="local-rubro">Indumentaria / Accesorios</p>
+        <div class="local-attrs">
+          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">22 m²</span></div>
+          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">4 m</span></div>
+          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
+          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Eléctrica reforzada</span></div>
+        </div>
+        <div class="local-tags">
+          <span class="local-tag">Iluminación LED</span><span class="local-tag">Probadores</span><span class="local-tag">Depósito</span>
+        </div>
+        <button class="local-cta" disabled>Actualmente ocupado</button>
+      </div>
+    </div>
+
+    <div class="local-card">
+      <div class="local-header">
+        <span class="local-num">Local 03</span>
+        <span class="badge-disponible badge-libre">Disponible</span>
+      </div>
+      <div class="local-body">
+        <h3 class="local-title">Planta alta · Nivel 1</h3>
+        <p class="local-rubro">Tecnología / Servicios digitales</p>
+        <div class="local-attrs">
+          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">28 m²</span></div>
+          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">4,5 m</span></div>
+          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
+          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Fibra óptica dedicada</span></div>
+        </div>
+        <div class="local-tags">
+          <span class="local-tag">Internet gigabit</span><span class="local-tag">Sala de reuniones</span><span class="local-tag">Acceso 24hs</span>
+        </div>
+        <button class="local-cta" onclick="openModal('Local 03 — Planta alta Nivel 1', '28 m²')">Consultar disponibilidad</button>
+      </div>
+    </div>
+
+    <div class="local-card">
+      <div class="local-header">
+        <span class="local-num">Local 04</span>
+        <span class="badge-disponible badge-reservado">Reservado</span>
+      </div>
+      <div class="local-body">
+        <h3 class="local-title">Interior pasillo · Nivel 0</h3>
+        <p class="local-rubro">Cosmética / Bienestar</p>
+        <div class="local-attrs">
+          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">14 m²</span></div>
+          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">3 m</span></div>
+          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
+          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Agua + eléctrica</span></div>
+        </div>
+        <div class="local-tags">
+          <span class="local-tag">Ventilación</span><span class="local-tag">Agua fría/caliente</span><span class="local-tag">Compacto</span>
+        </div>
+        <button class="local-cta" disabled>En proceso de reserva</button>
+      </div>
+    </div>
+
+    <div class="local-card">
+      <div class="local-header">
+        <span class="local-num">Local 05</span>
+        <span class="badge-disponible badge-libre">Disponible</span>
+      </div>
+      <div class="local-body">
+        <h3 class="local-title">Doble altura · Nivel 0–1</h3>
+        <p class="local-rubro">Diseño / Arte / Galería</p>
+        <div class="local-attrs">
+          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">45 m²</span></div>
+          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">7 m</span></div>
+          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">5,5 m (doble)</span></div>
+          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Completas</span></div>
+        </div>
+        <div class="local-tags">
+          <span class="local-tag">Doble altura</span><span class="local-tag">Marquesina</span><span class="local-tag">Mezzanine opcional</span><span class="local-tag">Premium</span>
+        </div>
+        <button class="local-cta" onclick="openModal('Local 05 — Doble altura', '45 m²')">Consultar disponibilidad</button>
+      </div>
+    </div>
+
+    <div class="local-card">
+      <div class="local-header">
+        <span class="local-num">Local 06</span>
+        <span class="badge-disponible badge-libre">Disponible</span>
+      </div>
+      <div class="local-body">
+        <h3 class="local-title">Compacto pasillo · Nivel 1</h3>
+        <p class="local-rubro">Fotografía / Estudio</p>
+        <div class="local-attrs">
+          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">12 m²</span></div>
+          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">2,8 m</span></div>
+          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
+          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Eléctrica reforzada</span></div>
+        </div>
+        <div class="local-tags">
+          <span class="local-tag">Ideal estudio</span><span class="local-tag">Bajo costo</span><span class="local-tag">Iluminación</span>
+        </div>
+        <button class="local-cta" onclick="openModal('Local 06 — Compacto Nivel 1', '12 m²')">Consultar disponibilidad</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="tour" style="background: var(--black);">
+  <p class="section-label">Recorrido virtual</p>
+  <h2 class="section-title">Tour 360° de la galería</h2>
+  <p class="section-sub">Explorá BiitHall desde donde estés antes de venir en persona.</p>
+
+  <div class="tour-wrapper">
+    <div class="tour-iframe-wrap" id="tour-container">
+      <div class="tour-placeholder" id="tour-placeholder" onclick="startTour()">
+        <div class="tour-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.87v6.26a1 1 0 0 1-1.447.9L15 14"/><rect x="1" y="6" width="15" height="12" rx="2"/></svg>
+        </div>
+        <p class="tour-label">Iniciar recorrido 360°</p>
+        <p class="tour-sublabel">Hacé clic para explorar la galería virtualmente</p>
+      </div>
+    </div>
+    <div class="tour-grid">
+      <div class="tour-thumb active" onclick="setZona(this)">
+        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <div><p class="tour-thumb-label">Entrada</p><p class="tour-thumb-sub">Acceso principal</p></div>
+      </div>
+      <div class="tour-thumb" onclick="setZona(this)">
+        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/></svg></div>
+        <div><p class="tour-thumb-label">Pasillo central</p><p class="tour-thumb-sub">Nivel 0</p></div>
+      </div>
+      <div class="tour-thumb" onclick="setZona(this)">
+        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></div>
+        <div><p class="tour-thumb-label">Planta alta</p><p class="tour-thumb-sub">Nivel 1</p></div>
+      </div>
+      <div class="tour-thumb" onclick="setZona(this)">
+        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <div><p class="tour-thumb-label">Local ejemplo</p><p class="tour-thumb-sub">Vista interior</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inquilinos" style="background: var(--mid);">
+  <p class="section-label">Soy inquilino</p>
+  <h2 class="section-title">Todo lo que necesitás<br>como locatario</h2>
+  <p class="section-sub">Accedé a recursos, soporte y la comunidad de BiitHall desde un solo lugar.</p>
+
+  <div class="inquilinos-grid">
+    <div class="inquilino-card">
+      <div class="inq-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <h3 class="inq-title">Reglamento y contrato</h3>
+      <p class="inq-desc">Accedé al reglamento interno, condiciones de alquiler, plazos, garantías y todo lo necesario para formalizar tu local en BiitHall.</p>
+      <a href="#contacto" class="inq-link">Solicitar documentación <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+    </div>
+    <div class="inquilino-card">
+      <div class="inq-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+      <h3 class="inq-title">Panel de inquilino</h3>
+      <p class="inq-desc">Consultá tu estado de cuenta, facturas, fecha de vencimiento y comunicados del administrador desde tu acceso personal.</p>
+      <a href="#contacto" class="inq-link">Acceder al portal <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+    </div>
+    <div class="inquilino-card">
+      <div class="inq-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+      <h3 class="inq-title">Soporte y mantenimiento</h3>
+      <p class="inq-desc">Reportá incidencias, solicitá mantenimiento o coordiná con el equipo de BiitHall directamente desde WhatsApp o el panel.</p>
+      <a href="#contacto" class="inq-link">Contactar soporte <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+    </div>
+    <div class="inquilino-card">
+      <div class="inq-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3 class="inq-title">Red de inquilinos</h3>
+      <p class="inq-desc">Conectate con el resto de los emprendedores del paseo. Eventos, colaboraciones y actividades conjuntas para hacer crecer todos los negocios.</p>
+      <a href="#contacto" class="inq-link">Unirme a la comunidad <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" style="background: var(--black);">
+  <div class="contacto-wrapper">
+    <div class="contacto-left">
+      <p class="section-label">Lista de espera</p>
+      <h2 class="section-title">Reservá tu lugar<br>antes de que salga</h2>
+      <p class="section-sub" style="margin-bottom:0">Los locales disponibles se cubren rápido. Dejá tus datos y te avisamos antes que nadie cuando haya uno que se ajuste a tu proyecto.</p>
+
+      <ul class="checklist">
+        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Te notificamos antes de publicar la vacante</li>
+        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Visita privada al espacio sin compromiso</li>
+        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Asesoramiento personalizado según tu rubro</li>
+        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Condiciones preferenciales para lista de espera</li>
+      </ul>
+
+      <div class="urgencia-bar">
+        <div class="urgencia-label">
+          <span>Ocupación actual del paseo</span>
+          <span>73% ocupado</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-card">
+        <p class="form-eyebrow">Contacto</p>
+        <h3 class="form-title">Anotate en la lista de espera</h3>
+
+        <form id="form-registro" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group"><label>Nombre</label><input type="text" placeholder="Tu nombre" required></div>
+            <div class="form-group"><label>Apellido</label><input type="text" placeholder="Tu apellido" required></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="nombre@email.com" required></div>
+          <div class="form-group"><label>WhatsApp</label><input type="tel" placeholder="221 000 0000"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Rubro del negocio</label>
+              <select>
+                <option value="" disabled selected>Seleccioná</option>
+                <option>Gastronomía</option>
+                <option>Indumentaria / Moda</option>
+                <option>Tecnología</option>
+                <option>Diseño / Arte</option>
+                <option>Cosmética / Bienestar</option>
+                <option>Servicios creativos</option>
+                <option>Fotografía / Estudio</option>
+                <option>Decoración</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Superficie necesaria</label>
+              <select>
+                <option value="" disabled selected>Seleccioná</option>
+                <option>Hasta 15 m²</option>
+                <option>15 – 25 m²</option>
+                <option>25 – 40 m²</option>
+                <option>Más de 40 m²</option>
+                <option>Sin preferencia</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Contanos brevemente tu proyecto (opcional)</label>
+            <textarea rows="3" placeholder="Qué tipo de negocio tenés en mente..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Anotarme en la lista de espera →</button>
+          <p class="form-note">Sin spam. Solo te contactamos cuando hay novedades relevantes para tu perfil.</p>
+        </form>
+
+        <div class="success-msg" id="success-msg">
+          <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>¡Ya estás en la lista!</h3>
+          <p>Te vamos a avisar en cuanto haya un local disponible que se adapte a tu proyecto. Mientras tanto podés escribirnos por WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--mid);">
+  <p class="section-label">Dónde encontrarnos</p>
+  <h2 class="section-title">En el centro de La Plata</h2>
+
+  <div class="ubicacion-row">
+    <div class="ubicacion-info">
+      <p><strong>BiitHall</strong> está ubicado en pleno centro platense, a metros de la diagonal principal. Con alto flujo peatonal durante toda la semana.</p>
+      <div class="ubicacion-detail">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p><strong>Calle 49 N° 621 entre 7 y 8</strong><br>La Plata, Buenos Aires</p>
+      </div>
+      <div class="ubicacion-detail">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <p>Abierto al público<br><strong>Lunes a sábado, 9 a 21 hs</strong></p>
+      </div>
+      <div class="ubicacion-detail">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <p>Consultas comerciales<br><strong>(221) 000-0000</strong></p>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>Calle 49 N° 621 · La Plata</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Biit<span>Hall</span></div>
+  <p>© 2025 BiitHall · Paseo Comercial · La Plata, Buenos Aires</p>
+  <p style="color:rgba(245,242,236,0.18);font-size:0.75rem;">Innovación · Emprendimiento · Comunidad</p>
+</footer>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <p class="modal-eyebrow">Consulta de disponibilidad</p>
+    <h3 class="modal-title" id="modal-title">Local disponible</h3>
+    <form onsubmit="submitModal(event)">
+      <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required></div>
+      <div class="form-group"><label>WhatsApp o email</label><input type="text" placeholder="221 000 0000 / email" required></div>
+      <div class="form-group">
+        <label>¿Cuándo querés visitar el local?</label>
+        <select>
+          <option value="" disabled selected>Elegí una opción</option>
+          <option>Esta semana</option>
+          <option>La semana que viene</option>
+          <option>En los próximos 15 días</option>
+          <option>Solo quiero información por ahora</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit">Enviar consulta →</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-registro').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+
+  function startTour() {
+    const ph = document.getElementById('tour-placeholder');
+    ph.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:2rem;height:100%;">
+        <div style="width:52px;height:52px;border-radius:50%;background:rgba(207,39,142,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:0.5rem;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#cf278e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <p style="font-family:Syne,sans-serif;font-weight:700;font-size:0.95rem;color:#F5F2EC;">Tour 360° próximamente</p>
+        <p style="font-size:0.82rem;color:#888;text-align:center;max-width:300px;line-height:1.6;">Estamos preparando el recorrido virtual de BiitHall. Mientras tanto podés visitarnos en persona o coordinamos una visita.</p>
+        <a href="#contacto" style="margin-top:0.8rem;background:#cf278e;color:#fff;font-family:Syne,sans-serif;font-weight:700;font-size:0.85rem;padding:0.65rem 1.5rem;border-radius:100px;text-decoration:none;">Coordinar visita</a>
+      </div>`;
+  }
+
+  function setZona(el) {
+    document.querySelectorAll('.tour-thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function openModal(nombre, sup) {
+    document.getElementById('modal-title').textContent = nombre + ' · ' + sup;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function submitModal(e) {
+    e.preventDefault();
+    document.querySelector('.modal').innerHTML = `
+      <div style="text-align:center;padding:1.5rem 0">
+        <div style="width:56px;height:56px;border-radius:50%;background:rgba(207,39,142,0.15);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#cf278e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 style="font-family:Syne,sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:0.5rem;">¡Consulta enviada!</h3>
+        <p style="font-size:0.88rem;color:rgba(245,242,236,0.5);line-height:1.6;margin-bottom:1.5rem;">Te contactamos en menos de 24 hs para coordinar la visita.</p>
+        <button onclick="closeModal()" style="background:#cf278e;color:#fff;border:none;font-family:Syne,sans-serif;font-weight:700;padding:0.7rem 1.8rem;border-radius:100px;cursor:pointer;">Cerrar</button>
+      </div>`;
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
