@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BiitHall Academy — Formación para Emprendedores · La Plata</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0a;--paper:#f7f3ee;--cream:#ede8e1;
+  --accent:#cf278e;--mid:#1c1c1c;--muted:#888;
+  --border:rgba(10,10,10,.1);--white:#fff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5%;background:rgba(10,10,10,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.25rem;color:var(--paper);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-back{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,243,238,.5);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .2s}
+.nav-back:hover{color:var(--accent)}
+.nav-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* HERO */
+.acad-hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:10rem 5% 6rem;position:relative;overflow:hidden;
+}
+.acad-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#160a10 50%,#0a0a0a 100%)}
+.acad-hero-glow{position:absolute;top:-10%;right:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(207,39,142,.15) 0%,transparent 65%);pointer-events:none}
+.acad-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(207,39,142,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(207,39,142,.04) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
+.acad-hero-body{position:relative;z-index:2;max-width:780px}
+.acad-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.3rem;border:1px solid rgba(207,39,142,.3);padding:.3rem .9rem;border-radius:100px;background:rgba(207,39,142,.07)}
+.acad-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.acad-h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.8rem,6vw,5rem);line-height:1.0;letter-spacing:-.03em;margin-bottom:1.2rem}
+.acad-h1 em{font-style:italic;color:var(--accent)}
+.acad-sub{font-size:1.1rem;font-weight:300;color:rgba(247,243,238,.65);max-width:520px;line-height:1.7;margin-bottom:2.5rem}
+.acad-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-fill{background:var(--accent);color:#fff;font-weight:700;font-size:.95rem;padding:.85rem 2.2rem;border-radius:100px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 30px rgba(207,39,142,.25)}
+.btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(207,39,142,.35)}
+.btn-ghost{color:var(--paper);border:1px solid rgba(255,255,255,.18);font-weight:600;font-size:.95rem;padding:.85rem 1.8rem;border-radius:100px;text-decoration:none;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.acad-stats{margin-top:3.5rem;display:flex;gap:2.5rem;flex-wrap:wrap}
+.acad-stat{display:flex;flex-direction:column}
+.acad-stat strong{font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:var(--paper);line-height:1}
+.acad-stat span{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.acad-div{width:1px;height:40px;background:rgba(255,255,255,.08);align-self:center}
+
+/* TICKER */
+.ticker{overflow:hidden;padding:.9rem 0;background:var(--accent);white-space:nowrap}
+.ticker-inner{display:inline-flex;animation:ticker 28s linear infinite}
+.ticker-inner span{font-family:'Outfit',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:0 2.5rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SHARED SECTION */
+section{padding:6rem 5%}
+.sec-kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
+.sec-h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
+.sec-sub{font-size:1rem;font-weight:300;color:rgba(247,243,238,.55);max-width:520px;line-height:1.7}
+
+/* BENEFICIOS */
+.beneficios-section{background:var(--mid)}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.ben-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:2rem;transition:border-color .3s,transform .3s}
+.ben-card:hover{border-color:rgba(207,39,142,.35);transform:translateY(-4px)}
+.ben-num{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;line-height:1;color:rgba(207,39,142,.15);margin-bottom:.8rem}
+.ben-icon{width:44px;height:44px;border-radius:12px;background:rgba(207,39,142,.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
+.ben-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ben-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.5rem}
+.ben-desc{font-size:.87rem;color:rgba(247,243,238,.5);line-height:1.7}
+
+/* PROGRAMAS */
+.programas-section{background:var(--ink)}
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.prog-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;transition:border-color .3s,transform .3s}
+.prog-card:hover{border-color:rgba(207,39,142,.4);transform:translateY(-5px)}
+.prog-card-top{padding:1.5rem 1.8rem 0}
+.prog-badge{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .7rem;border-radius:100px;margin-bottom:1rem}
+.pb-rose{background:rgba(207,39,142,.12);color:var(--accent)}
+.pb-blue{background:rgba(80,160,255,.12);color:#50a0ff}
+.pb-gold{background:rgba(220,160,0,.12);color:#dca000}
+.prog-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;line-height:1.25;margin-bottom:.5rem}
+.prog-desc{font-size:.85rem;color:rgba(247,243,238,.5);line-height:1.65;margin-bottom:1.2rem}
+.prog-card-sep{height:1px;background:rgba(255,255,255,.06)}
+.prog-card-foot{padding:1.2rem 1.8rem;display:flex;justify-content:space-between;align-items:center}
+.prog-meta{font-size:.78rem;color:var(--muted);display:flex;gap:1rem}
+.prog-meta span{display:flex;align-items:center;gap:.3rem}
+.prog-meta svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.prog-cta{font-size:.78rem;font-weight:700;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:.3rem;transition:gap .2s}
+.prog-cta:hover{gap:.55rem}
+
+/* RESERVA */
+.reserva-section{background:var(--mid)}
+.reserva-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem}
+.reserva-left{}
+.check-list{list-style:none;margin-top:1.8rem;display:flex;flex-direction:column;gap:1rem}
+.check-list li{display:flex;align-items:flex-start;gap:.8rem;font-size:.95rem;color:rgba(247,243,238,.7)}
+.ck{width:20px;height:20px;border-radius:50%;background:rgba(207,39,142,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ck svg{width:11px;height:11px;stroke:var(--accent);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.open-badge{
+  margin-top:2.5rem;background:rgba(207,39,142,.08);border:1px solid rgba(207,39,142,.2);
+  border-radius:14px;padding:1.2rem 1.5rem;
+}
+.ob-title{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.ob-text{font-size:.88rem;color:rgba(247,243,238,.6);line-height:1.6}
+
+.form-dark{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2.5rem}
+.fd-ey{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.fd-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.35rem;margin-bottom:1.6rem}
+.fd input,.fd select,.fd textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--paper);font-family:'Outfit',sans-serif;font-size:.95rem;padding:.75rem 1rem;outline:none;transition:border-color .2s;appearance:none;resize:none;margin-bottom:1rem}
+.fd input::placeholder,.fd textarea::placeholder{color:rgba(247,243,238,.22)}
+.fd input:focus,.fd select:focus,.fd textarea:focus{border-color:rgba(207,39,142,.45)}
+.fd select option{background:#1c1c1c;color:var(--paper)}
+.fd-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-acc{width:100%;background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;padding:.9rem;border-radius:10px;border:none;cursor:pointer;transition:opacity .2s,transform .2s}
+.btn-acc:hover{opacity:.88;transform:translateY(-1px)}
+.fd-note{text-align:center;font-size:.73rem;color:rgba(247,243,238,.28);margin-top:.9rem}
+.fd-success{display:none;text-align:center;padding:1.5rem 0}
+.fds-icon{width:56px;height:56px;border-radius:50%;background:rgba(207,39,142,.15);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center}
+.fds-icon svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fd-success h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;margin-bottom:.4rem}
+.fd-success p{font-size:.85rem;color:rgba(247,243,238,.5);line-height:1.6}
+
+@media(max-width:900px){
+  .ben-grid,.prog-grid{grid-template-columns:1fr}
+  .reserva-wrapper{grid-template-columns:1fr;gap:3rem}
+  .fd-row{grid-template-columns:1fr}
+}
+
+/* BACK BANNER */
+.back-banner{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:3.5rem 5%;text-align:center}
+.back-banner p{font-size:.88rem;color:rgba(247,243,238,.4);margin-bottom:1rem}
+.btn-back-outline{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.15);color:rgba(247,243,238,.7);padding:.7rem 1.6rem;border-radius:100px;text-decoration:none;font-size:.88rem;font-weight:600;transition:border-color .2s,color .2s}
+.btn-back-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:2rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--paper)}
+.footer-logo span{color:var(--accent)}
+footer p{font-size:.78rem;color:rgba(247,243,238,.3)}
+
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.in{opacity:1;transform:translateY(0)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.acad-hero-body>*{animation:fadeUp .7s ease both}
+.acad-eyebrow{animation-delay:.0s}
+.acad-h1{animation-delay:.1s}
+.acad-sub{animation-delay:.2s}
+.acad-actions{animation-delay:.3s}
+.acad-stats{animation-delay:.4s}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="biithall.html" class="nav-logo">Biit<span>Hall</span></a>
+  <a href="biithall.html" class="nav-back">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver a BiitHall
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="acad-hero">
+  <div class="acad-hero-bg"></div>
+  <div class="acad-hero-glow"></div>
+  <div class="acad-hero-grid"></div>
+  <div class="acad-hero-body">
+    <div class="acad-eyebrow">BiitHall Academy · La Plata</div>
+    <h1 class="acad-h1">Aprendé lo que<br>tu negocio necesita<br><em>en serio</em></h1>
+    <p class="acad-sub">Programa de formación semipresencial con herramientas prácticas para emprendedores. Encuentros en BiitHall, abierto a locatarios y emprendedores externos.</p>
+    <div class="acad-actions">
+      <a href="#reserva" class="btn-fill">Reservar clase gratuita</a>
+      <a href="#programas" class="btn-ghost">Ver programas</a>
+    </div>
+    <div class="acad-stats">
+      <div class="acad-stat"><strong>100%</strong><span>Práctico y aplicable</span></div>
+      <div class="acad-div"></div>
+      <div class="acad-stat"><strong>Gratis</strong><span>Primera clase</span></div>
+      <div class="acad-div"></div>
+      <div class="acad-stat"><strong>Presencial</strong><span>En BiitHall, La Plata</span></div>
+      <div class="acad-div"></div>
+      <div class="acad-stat"><strong>Abierto</strong><span>Locatarios y externos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <span>Ventas</span><span>·</span><span>Marketing digital</span><span>·</span><span>Finanzas</span><span>·</span><span>Marca personal</span><span>·</span><span>Redes sociales</span><span>·</span><span>Liderazgo</span><span>·</span><span>E-commerce</span><span>·</span><span>Validación de ideas</span><span>·</span>
+  <span>Ventas</span><span>·</span><span>Marketing digital</span><span>·</span><span>Finanzas</span><span>·</span><span>Marca personal</span><span>·</span><span>Redes sociales</span><span>·</span><span>Liderazgo</span><span>·</span><span>E-commerce</span><span>·</span><span>Validación de ideas</span><span>·</span>
+</div></div>
+
+<!-- BENEFICIOS -->
+<section class="beneficios-section">
+  <p class="sec-kicker fade-up">Por qué Academy</p>
+  <h2 class="sec-h2 fade-up">Lo que vas a ganar</h2>
+  <p class="sec-sub fade-up">Cada módulo termina con algo concreto para aplicar en tu negocio.</p>
+
+  <div class="ben-grid">
+    <div class="ben-card fade-up">
+      <div class="ben-num">01</div>
+      <div class="ben-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3 class="ben-title">Mentores con trayectoria real</h3>
+      <p class="ben-desc">Aprendés de emprendedores y profesionales que ya transitaron el camino. Casos concretos, no teoría vacía.</p>
+    </div>
+    <div class="ben-card fade-up">
+      <div class="ben-num">02</div>
+      <div class="ben-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <h3 class="ben-title">Entregables por módulo</h3>
+      <p class="ben-desc">Cada clase termina con una tarea aplicable. Salís con algo hecho, no solo aprendido.</p>
+    </div>
+    <div class="ben-card fade-up">
+      <div class="ben-num">03</div>
+      <div class="ben-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3 class="ben-title">Red de contactos platense</h3>
+      <p class="ben-desc">Conectate con otros emprendedores de La Plata. La comunidad de BiitHall como punto de partida.</p>
+    </div>
+    <div class="ben-card fade-up">
+      <div class="ben-num">04</div>
+      <div class="ben-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+      <h3 class="ben-title">Espacio físico único</h3>
+      <p class="ben-desc">Clases en BiitHall, un espacio de tecnología e innovación. Ambiente pensado para crear y aprender.</p>
+    </div>
+    <div class="ben-card fade-up">
+      <div class="ben-num">05</div>
+      <div class="ben-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3 class="ben-title">Modalidad semipresencial</h3>
+      <p class="ben-desc">Encuentros presenciales en BiitHall complementados con material online. Avanzás a tu ritmo.</p>
+    </div>
+    <div class="ben-card fade-up">
+      <div class="ben-num">06</div>
+      <div class="ben-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3 class="ben-title">Inversión accesible</h3>
+      <p class="ben-desc">Primera clase gratuita. Cuotas accesibles diseñadas para emprendedores que están arrancando.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMAS -->
+<section id="programas" class="programas-section">
+  <p class="sec-kicker fade-up">Programas</p>
+  <h2 class="sec-h2 fade-up">Lo que podés aprender</h2>
+  <p class="sec-sub fade-up">Módulos intensivos de 4 a 8 semanas, diseñados para que podás avanzar mientras trabajás.</p>
+
+  <div class="prog-grid">
+    <div class="prog-card fade-up">
+      <div class="prog-card-top">
+        <span class="prog-badge pb-rose">Más popular</span>
+        <h3 class="prog-title">Lanzá tu Negocio desde Cero</h3>
+        <p class="prog-desc">Validación de idea, modelo de negocio, primeras ventas y estructura básica. Ideal para arrancar sin perder tiempo ni dinero.</p>
+      </div>
+      <div class="prog-card-sep"></div>
+      <div class="prog-card-foot">
+        <div class="prog-meta">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8 semanas</span>
+          <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Inicial</span>
+        </div>
+        <a href="#reserva" class="prog-cta">Reservar <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+      </div>
+    </div>
+
+    <div class="prog-card fade-up">
+      <div class="prog-card-top">
+        <span class="prog-badge pb-blue">Digital</span>
+        <h3 class="prog-title">Marketing Digital para Emprendedores</h3>
+        <p class="prog-desc">Redes sociales, publicidad paga, contenido y posicionamiento. Conseguí clientes sin necesitar una agencia.</p>
+      </div>
+      <div class="prog-card-sep"></div>
+      <div class="prog-card-foot">
+        <div class="prog-meta">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>6 semanas</span>
+          <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Todos los niveles</span>
+        </div>
+        <a href="#reserva" class="prog-cta">Reservar <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+      </div>
+    </div>
+
+    <div class="prog-card fade-up">
+      <div class="prog-card-top">
+        <span class="prog-badge pb-gold">Finanzas</span>
+        <h3 class="prog-title">Manejo Financiero del Emprendedor</h3>
+        <p class="prog-desc">Costos, precios, flujo de caja y planificación. Tomá decisiones con datos, no con intuición.</p>
+      </div>
+      <div class="prog-card-sep"></div>
+      <div class="prog-card-foot">
+        <div class="prog-meta">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>4 semanas</span>
+          <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Intermedio</span>
+        </div>
+        <a href="#reserva" class="prog-cta">Reservar <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVA -->
+<section id="reserva" class="reserva-section">
+  <div class="reserva-wrapper">
+    <div class="reserva-left fade-up">
+      <p class="sec-kicker">Clase gratuita</p>
+      <h2 class="sec-h2">Vení a conocer<br>la Academy</h2>
+      <p class="sec-sub" style="margin-bottom:0">Sin compromiso. Una clase completa de 90 minutos para que veas si es para vos.</p>
+
+      <ul class="check-list">
+        <li><div class="ck"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>90 minutos de clase real, sin costo</li>
+        <li><div class="ck"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Conocé el espacio y los mentores</li>
+        <li><div class="ck"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Materiales de la clase para llevarte</li>
+        <li><div class="ck"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Consulta 1 a 1 al finalizar</li>
+        <li><div class="ck"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Acceso al espacio BiitHall</li>
+      </ul>
+
+      <div class="open-badge">
+        <p class="ob-title">Abierto a todos</p>
+        <p class="ob-text">La Academy está abierta tanto para <strong style="color:var(--paper)">locatarios de BiitHall</strong> como para <strong style="color:var(--paper)">emprendedores externos</strong>. No necesitás ser parte del paseo para participar.</p>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <div class="form-dark">
+        <p class="fd-ey">Reserva tu lugar</p>
+        <h3 class="fd-title">Clase de presentación gratuita</h3>
+
+        <form class="fd" id="form-academy" onsubmit="submitAcademy(event)">
+          <div class="fd-row">
+            <input type="text" placeholder="Nombre" required>
+            <input type="text" placeholder="Apellido">
+          </div>
+          <input type="email" placeholder="Email" required>
+          <input type="tel" placeholder="WhatsApp · 221 000 0000">
+          <select>
+            <option value="" disabled selected>¿Cuál es tu rubro?</option>
+            <option>Gastronomía</option><option>Indumentaria / Moda</option>
+            <option>Tecnología</option><option>Diseño / Arte</option>
+            <option>Servicios profesionales</option><option>Comercio</option>
+            <option>Todavía no tengo rubro definido</option>
+          </select>
+          <select>
+            <option value="" disabled selected>¿Qué programa te interesa?</option>
+            <option>Lanzá tu Negocio desde Cero</option>
+            <option>Marketing Digital</option>
+            <option>Manejo Financiero</option>
+            <option>No sé aún</option>
+          </select>
+          <button type="submit" class="btn-acc">Quiero mi clase gratuita →</button>
+          <p class="fd-note">Sin spam. Solo te contactamos para confirmar fecha y horario.</p>
+        </form>
+
+        <div class="fd-success" id="success-academy">
+          <div class="fds-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>¡Ya estás anotado/a!</h3>
+          <p>En las próximas 24 horas te contactamos para confirmar el día y horario de tu clase gratuita en BiitHall.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACK BANNER -->
+<div class="back-banner">
+  <p>¿Querés conocer el paseo comercial?</p>
+  <a href="biithall.html" class="btn-back-outline">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver a BiitHall
+  </a>
+</div>
+
+<footer>
+  <div class="footer-logo">Biit<span>Hall</span> <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:.8rem;color:rgba(247,243,238,.35);margin-left:.4rem">Academy</span></div>
+  <p>© 2025 BiitHall Academy · La Plata, Buenos Aires</p>
+</footer>
+
+<script>
+const faders=document.querySelectorAll('.fade-up');
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.12});
+faders.forEach(f=>obs.observe(f));
+
+function submitAcademy(e){
+  e.preventDefault();
+  document.getElementById('form-academy').style.display='none';
+  document.getElementById('success-academy').style.display='block';
+}
+</script>
+</body>
+</html>
