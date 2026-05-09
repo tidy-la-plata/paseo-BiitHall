@@ -3,619 +3,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BiitHall — Paseo Comercial de Emprendedores · La Plata</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>BiitHall — Paseo Comercial · La Plata</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0a;
+  --paper:#f7f3ee;
+  --cream:#ede8e1;
+  --accent:#cf278e;
+  --accent2:#ff6bb5;
+  --mid:#1c1c1c;
+  --muted:#888;
+  --border:rgba(10,10,10,0.1);
+  --white:#fff;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
 
-  :root {
-    --black: #0D0D0D;
-    --white: #F5F2EC;
-    --accent: #cf278e;
-    --accent-dark: #a01f6e;
-    --mid: #1A1A1A;
-    --card-bg: #141414;
-    --muted: #888;
-    --border: rgba(255,255,255,0.08);
-  }
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 5%;
+  background:rgba(10,10,10,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1.25rem;letter-spacing:0.02em;color:var(--paper);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(247,243,238,0.5);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-academy{
+  background:var(--accent);color:var(--white)!important;
+  padding:.5rem 1.2rem;border-radius:100px;
+  font-size:.78rem!important;font-weight:700!important;letter-spacing:.08em!important;
+  transition:opacity .2s!important;
+}
+.nav-academy:hover{opacity:.85!important}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--paper);border-radius:2px;transition:.3s}
+@media(max-width:760px){
+  .nav-links a:not(.nav-academy){display:none}
+  .nav-burger{display:flex}
+}
 
-  html { scroll-behavior: smooth; }
+/* ─── HERO / CARRUSEL ─── */
+.hero-carousel{position:relative;width:100%;height:100vh;overflow:hidden;margin-top:0}
+.carousel-track{display:flex;height:100%;transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.carousel-slide{
+  min-width:100%;height:100%;position:relative;
+  display:flex;align-items:center;
+  overflow:hidden;
+}
+.slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(10,10,10,.88) 0%,rgba(10,10,10,.6) 45%,rgba(10,10,10,.2) 100%);
+}
+.slide-body{position:relative;z-index:2;padding:0 7%;max-width:680px;margin-top:4rem}
+.slide-kicker{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.2rem;
+  border:1px solid rgba(207,39,142,.3);padding:.3rem .9rem;border-radius:100px;
+  background:rgba(207,39,142,.07);
+}
+.slide-kicker::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.slide-h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.4rem,5.5vw,4.4rem);line-height:1.0;letter-spacing:-.02em;margin-bottom:1.1rem}
+.slide-h1 em{font-style:italic;color:var(--accent)}
+.slide-p{font-size:1rem;font-weight:300;color:rgba(247,243,238,.65);max-width:440px;margin-bottom:2rem;line-height:1.7}
+.slide-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-fill{background:var(--accent);color:#fff;font-weight:700;font-size:.9rem;padding:.8rem 2rem;border-radius:100px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 30px rgba(207,39,142,.25)}
+.btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(207,39,142,.35)}
+.btn-ghost-w{color:var(--paper);border:1px solid rgba(255,255,255,.2);font-weight:600;font-size:.9rem;padding:.8rem 1.8rem;border-radius:100px;text-decoration:none;transition:border-color .2s,color .2s}
+.btn-ghost-w:hover{border-color:var(--accent);color:var(--accent)}
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+/* carousel controls */
+.carousel-prev,.carousel-next{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:10;
+  background:rgba(10,10,10,.55);border:1px solid rgba(255,255,255,.12);
+  color:var(--paper);width:46px;height:46px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  backdrop-filter:blur(8px);transition:background .2s,border-color .2s;
+}
+.carousel-prev:hover,.carousel-next:hover{background:rgba(207,39,142,.35);border-color:rgba(207,39,142,.5)}
+.carousel-prev{left:1.5rem}.carousel-next{right:1.5rem}
+.carousel-prev svg,.carousel-next svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.carousel-dots{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:10}
+.carousel-dot{width:6px;height:6px;border-radius:100px;background:rgba(255,255,255,.25);border:none;cursor:pointer;transition:background .3s,width .3s}
+.carousel-dot.active{background:var(--accent);width:22px}
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 5%;
-    background: rgba(13,13,13,0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
+/* scroll indicator */
+.scroll-hint{position:absolute;bottom:2rem;right:5%;z-index:10;display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(247,243,238,.35);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+.scroll-hint-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(207,39,142,.6),transparent)}
 
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: -0.02em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--accent); }
+/* ─── TICKER ─── */
+.ticker{overflow:hidden;padding:.9rem 0;background:var(--accent);white-space:nowrap}
+.ticker-inner{display:inline-flex;animation:ticker 30s linear infinite}
+.ticker-inner span{font-family:'Outfit',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:0 2.5rem}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-  .nav-links a {
-    font-size: 0.85rem;
-    color: rgba(245,242,236,0.55);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
+/* ─── SCROLLYTELLING ─── */
+.story-section{background:var(--ink)}
+.story-sticky-wrap{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:100vh;
+  position:sticky;top:0;
+  /* cada step tiene su propia sticky */
+}
+.story-outer{position:relative}
+.story-visual{
+  position:sticky;top:0;height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.story-visual-inner{width:100%;height:100%;position:relative}
+.story-img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .6s ease;
+}
+.story-img.active{opacity:1}
+.story-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.25),rgba(10,10,10,.1))}
+.story-counter{
+  position:absolute;bottom:2rem;right:2rem;
+  font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;
+  color:rgba(207,39,142,.18);line-height:1;letter-spacing:-.03em;
+  transition:opacity .4s;
+}
+.story-steps{padding:0 8% 0 6%}
+.story-step{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:6rem 0;opacity:.3;transition:opacity .4s;
+}
+.story-step.visible{opacity:1}
+.step-year{
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.step-year::before{content:'';width:24px;height:2px;background:var(--accent);border-radius:2px}
+.step-h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
+.step-h2 em{font-style:italic;color:var(--accent)}
+.step-p{font-size:1rem;font-weight:300;color:rgba(247,243,238,.65);line-height:1.75;max-width:420px}
+.step-stat{
+  display:inline-flex;flex-direction:column;margin-top:1.8rem;
+  padding:1.2rem 1.8rem;background:rgba(207,39,142,.08);
+  border:1px solid rgba(207,39,142,.2);border-radius:14px;
+}
+.step-stat strong{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--accent);line-height:1}
+.step-stat span{font-size:.78rem;color:rgba(247,243,238,.5);margin-top:.3rem}
 
-  .nav-cta {
-    background: var(--accent) !important;
-    color: var(--white) !important;
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 0.82rem !important;
-    letter-spacing: 0.04em;
-    padding: 0.55rem 1.3rem !important;
-    border-radius: 100px !important;
-  }
-  .nav-cta:hover { opacity: 0.82; color: var(--white) !important; }
+@media(max-width:900px){
+  .story-sticky-wrap,.story-outer{display:block}
+  .story-visual{display:none}
+  .story-step{min-height:auto;padding:4rem 0;opacity:1}
+  .story-steps{padding:4rem 5%}
+}
 
-  @media (max-width: 700px) {
-    .nav-links a:not(.nav-cta) { display: none; }
-  }
+/* ─── COMUNIDAD ACTUAL ─── */
+.comunidad-section{background:var(--cream);color:var(--ink);padding:7rem 5%}
+.section-kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
+.section-h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
+.section-sub{font-size:1rem;font-weight:300;color:rgba(10,10,10,.55);max-width:520px;line-height:1.7}
+.comunidad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.comunidad-card{
+  background:#fff;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(10,10,10,.07);
+  transition:transform .3s,box-shadow .3s;
+  text-decoration:none;color:inherit;
+}
+.comunidad-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(10,10,10,.12)}
+.comunidad-card-img{
+  width:100%;height:180px;object-fit:cover;
+  background:var(--cream);display:block;
+  border-bottom:1px solid rgba(10,10,10,.06);
+}
+.comunidad-card-img-ph{
+  width:100%;height:180px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;
+  border-bottom:1px solid rgba(10,10,10,.06);
+}
+.comunidad-card-body{padding:1.5rem}
+.cc-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;margin-bottom:.3rem}
+.cc-rubro{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+.cc-desc{font-size:.87rem;color:rgba(10,10,10,.55);line-height:1.6;margin-bottom:1.2rem}
+.cc-link{
+  font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:.4rem;
+  transition:gap .2s;
+}
+.cc-link:hover{gap:.7rem}
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 10rem 5% 6rem;
-    position: relative;
-    overflow: hidden;
-  }
+/* ─── DONDE ESTAMOS ─── */
+.donde-section{background:var(--ink);padding:7rem 5%}
+.donde-wrapper{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;margin-top:3.5rem}
+.donde-info{}
+.donde-detail{display:flex;align-items:flex-start;gap:.9rem;margin-top:1.8rem}
+.donde-detail svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+.donde-detail-text strong{font-size:.95rem;color:var(--paper);display:block;margin-bottom:.2rem}
+.donde-detail-text span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.accesos-title{font-family:'Outfit',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2.5rem;margin-bottom:1rem}
+.acceso-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(207,39,142,.3);background:rgba(207,39,142,.07);
+  border-radius:100px;padding:.4rem 1rem;margin:.3rem .3rem 0 0;
+  font-size:.8rem;font-weight:600;color:var(--accent);
+}
+.mapa-wrap{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.07);height:440px;position:relative}
+.mapa-wrap iframe{width:100%;height:100%;border:none;display:block}
+.mapa-overlay-labels{position:absolute;pointer-events:none}
+.mapa-label{
+  position:absolute;background:var(--accent);color:#fff;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.06em;
+  padding:.3rem .75rem;border-radius:100px;white-space:nowrap;
+  box-shadow:0 4px 16px rgba(207,39,142,.4);
+}
+.mapa-label-48{top:38%;left:22%}
+.mapa-label-49{bottom:28%;left:22%}
 
-  .hero-bg-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(207,39,142,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(207,39,142,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
+@media(max-width:900px){.donde-wrapper{grid-template-columns:1fr}}
 
-  .hero-bg-glow {
-    position: absolute; top: -10%; right: -15%;
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(207,39,142,0.13) 0%, transparent 65%);
-    pointer-events: none;
-  }
+/* ─── SUMATE A LA COMUNIDAD ─── */
+.sumate-section{background:var(--cream);color:var(--ink);padding:7rem 5%}
+.sumate-top{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3.5rem}
+.servicios-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.servicio-card{
+  background:#fff;border-radius:14px;padding:1.4rem;
+  border:1px solid rgba(10,10,10,.07);
+}
+.serv-icon{width:40px;height:40px;border-radius:10px;background:rgba(207,39,142,.08);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.serv-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.serv-name{font-weight:700;font-size:.9rem;margin-bottom:.25rem;color:var(--ink)}
+.serv-desc{font-size:.8rem;color:rgba(10,10,10,.5);line-height:1.55}
 
-  .hero-eyebrow {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 28px; height: 2px;
-    background: var(--accent);
-    border-radius: 2px;
-  }
+/* disponibilidad pills */
+.disp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.disp-live{display:inline-flex;align-items:center;gap:.45rem;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.disp-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.disp-list{display:flex;flex-direction:column;gap:.75rem}
+.disp-item{
+  background:#fff;border-radius:12px;padding:1rem 1.2rem;
+  border:1px solid rgba(10,10,10,.07);
+  display:flex;justify-content:space-between;align-items:center;
+  transition:border-color .2s;
+}
+.disp-item:hover{border-color:rgba(207,39,142,.3)}
+.disp-name{font-weight:600;font-size:.9rem;color:var(--ink)}
+.disp-meta{font-size:.78rem;color:rgba(10,10,10,.45);margin-top:.15rem}
+.badge{font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.25rem .7rem;border-radius:100px}
+.badge-verde{background:rgba(0,180,100,.1);color:#008844}
+.badge-rojo{background:rgba(220,50,50,.1);color:#cc2222}
+.badge-naranja{background:rgba(230,130,0,.1);color:#cc6600}
 
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.8rem, 6vw, 5.2rem);
-    line-height: 1.0;
-    letter-spacing: -0.03em;
-    max-width: 860px;
-    margin-bottom: 1.8rem;
-  }
-  .hero h1 em { font-style: normal; color: var(--accent); }
+/* form */
+.sumate-form-wrap{margin-top:3rem}
+.form-card-light{background:#fff;border-radius:20px;padding:2.5rem;border:1px solid rgba(10,10,10,.08)}
+.form-card-light .form-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.form-card-light .form-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;margin-bottom:1.6rem;color:var(--ink)}
+.form-card-light .form-group{margin-bottom:1rem}
+.form-card-light label{display:block;font-size:.78rem;font-weight:600;color:rgba(10,10,10,.5);margin-bottom:.4rem;letter-spacing:.03em}
+.form-card-light input,.form-card-light select,.form-card-light textarea{
+  width:100%;background:var(--cream);border:1px solid rgba(10,10,10,.12);
+  border-radius:10px;color:var(--ink);font-family:'Outfit',sans-serif;
+  font-size:.95rem;padding:.75rem 1rem;outline:none;transition:border-color .2s;
+  appearance:none;resize:none;
+}
+.form-card-light input::placeholder,.form-card-light textarea::placeholder{color:rgba(10,10,10,.3)}
+.form-card-light input:focus,.form-card-light select:focus,.form-card-light textarea:focus{border-color:rgba(207,39,142,.45)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-submit-dark{
+  width:100%;background:var(--ink);color:var(--paper);
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;
+  padding:.9rem;border-radius:10px;border:none;cursor:pointer;
+  margin-top:.5rem;transition:background .2s,transform .2s;
+}
+.btn-submit-dark:hover{background:var(--accent);transform:translateY(-1px)}
+.form-note-light{text-align:center;font-size:.73rem;color:rgba(10,10,10,.3);margin-top:.9rem}
+.success-light{display:none;text-align:center;padding:1.5rem 0}
+.success-light-icon{width:52px;height:52px;border-radius:50%;background:rgba(207,39,142,.1);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center}
+.success-light-icon svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.success-light h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--ink);margin-bottom:.4rem}
+.success-light p{font-size:.85rem;color:rgba(10,10,10,.5);line-height:1.6}
 
-  .hero-sub {
-    font-size: 1.15rem;
-    font-weight: 300;
-    color: rgba(245,242,236,0.65);
-    max-width: 520px;
-    margin-bottom: 2.8rem;
-    line-height: 1.7;
-  }
+@media(max-width:900px){
+  .sumate-top{grid-template-columns:1fr}
+  .servicios-grid{grid-template-columns:1fr}
+  .comunidad-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
 
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+/* ─── CONTACTO ─── */
+.contacto-section{background:var(--mid);padding:7rem 5%}
+.contacto-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem}
+.contacto-text .section-h2{color:var(--paper)}
+.contacto-text .section-sub{color:rgba(247,243,238,.5)}
+.contacto-list{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:1.2rem}
+.contacto-list li{display:flex;align-items:flex-start;gap:.85rem;font-size:.95rem;color:rgba(247,243,238,.7)}
+.ci{width:20px;height:20px;border-radius:50%;background:rgba(207,39,142,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ci svg{width:11px;height:11px;stroke:var(--accent);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.rrss-row{display:flex;gap:1rem;margin-top:2.5rem}
+.rrss-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(255,255,255,.12);color:rgba(247,243,238,.6);
+  padding:.55rem 1.1rem;border-radius:100px;font-size:.8rem;font-weight:600;
+  text-decoration:none;transition:border-color .2s,color .2s;
+}
+.rrss-btn:hover{border-color:var(--accent);color:var(--accent)}
+.rrss-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.contacto-form-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:2.5rem;
+}
+.cf-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.cf-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;margin-bottom:1.6rem;color:var(--paper)}
+.cf input,.cf select,.cf textarea{
+  width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;color:var(--paper);font-family:'Outfit',sans-serif;
+  font-size:.95rem;padding:.75rem 1rem;outline:none;transition:border-color .2s;
+  appearance:none;resize:none;margin-bottom:1rem;
+}
+.cf input::placeholder,.cf textarea::placeholder{color:rgba(247,243,238,.22)}
+.cf input:focus,.cf select:focus,.cf textarea:focus{border-color:rgba(207,39,142,.45)}
+.cf select option{background:#1c1c1c;color:var(--paper)}
+.btn-submit-accent{
+  width:100%;background:var(--accent);color:#fff;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;
+  padding:.9rem;border-radius:10px;border:none;cursor:pointer;
+  transition:opacity .2s,transform .2s;
+}
+.btn-submit-accent:hover{opacity:.88;transform:translateY(-1px)}
 
-  .btn-primary {
-    background: var(--accent);
-    color: var(--white);
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 0.9rem 2.2rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 0 40px rgba(207,39,142,0.28);
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 50px rgba(207,39,142,0.38); }
+@media(max-width:900px){.contacto-wrapper{grid-template-columns:1fr;gap:3rem}}
 
-  .btn-outline {
-    color: var(--white);
-    border: 1px solid rgba(255,255,255,0.18);
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.85rem 2rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+/* ─── ACADEMY BANNER ─── */
+.academy-banner{
+  background:var(--accent);padding:5rem 5%;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.academy-banner-text{}
+.ab-kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.7rem}
+.ab-h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:.8rem}
+.ab-h2 em{font-style:italic;opacity:.8}
+.ab-p{font-size:.95rem;color:rgba(255,255,255,.75);max-width:500px;line-height:1.65}
+.btn-academy-white{
+  background:#fff;color:var(--accent);
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;
+  padding:1rem 2.4rem;border-radius:100px;text-decoration:none;
+  white-space:nowrap;transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);flex-shrink:0;
+}
+.btn-academy-white:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.2)}
 
-  .hero-badge {
-    margin-top: 4rem;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .hero-stat { display: flex; flex-direction: column; }
-  .hero-stat strong {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.8rem;
-    color: var(--white);
-    line-height: 1;
-  }
-  .hero-stat span { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
-  .hero-divider { width: 1px; height: 40px; background: var(--border); align-self: center; }
+/* ─── FOOTER ─── */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:2.5rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:var(--paper)}
+.footer-logo span{color:var(--accent)}
+footer p{font-size:.78rem;color:rgba(247,243,238,.3)}
 
-  /* TICKER */
-  .ticker { overflow: hidden; padding: 1rem 0; background: var(--accent); white-space: nowrap; }
-  .ticker-inner { display: inline-flex; animation: ticker 35s linear infinite; }
-  .ticker-inner span {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--white);
-    padding: 0 2.5rem;
-  }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* SECTIONS */
-  section { padding: 6rem 5%; }
-  .section-label {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2rem, 4vw, 3rem);
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 1.2rem;
-  }
-  .section-sub {
-    font-size: 1rem;
-    font-weight: 300;
-    color: rgba(245,242,236,0.55);
-    max-width: 500px;
-    line-height: 1.7;
-  }
-
-  /* PROPUESTA */
-  .propuesta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-top: 4rem;
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  .prop-card { background: var(--card-bg); padding: 2.5rem; transition: background 0.3s; }
-  .prop-card:hover { background: #1e1e1e; }
-  .prop-number {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 3.5rem;
-    line-height: 1;
-    color: rgba(207,39,142,0.13);
-    margin-bottom: 1rem;
-    letter-spacing: -0.04em;
-  }
-  .prop-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: rgba(207,39,142,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.2rem;
-  }
-  .prop-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .prop-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; }
-  .prop-desc { font-size: 0.9rem; color: rgba(245,242,236,0.5); line-height: 1.7; }
-
-  /* LOCALES */
-  .locales-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-  .disponibilidad-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(207,39,142,0.1);
-    border: 1px solid rgba(207,39,142,0.25);
-    border-radius: 100px;
-    padding: 0.5rem 1.1rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.06em;
-  }
-  .dot-live {
-    width: 7px; height: 7px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 1.8s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
-
-  .locales-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-
-  .local-card {
-    background: var(--card-bg);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .local-card:hover { border-color: rgba(207,39,142,0.35); transform: translateY(-4px); }
-
-  .local-header { padding: 1.5rem 1.8rem 0; display: flex; justify-content: space-between; align-items: flex-start; }
-  .local-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
-
-  .badge-disponible { font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 100px; }
-  .badge-libre { background: rgba(0,200,120,0.12); color: #00c878; }
-  .badge-ocupado { background: rgba(255,160,80,0.12); color: #ffa050; }
-  .badge-reservado { background: rgba(207,39,142,0.12); color: var(--accent); }
-
-  .local-body { padding: 1rem 1.8rem 1.8rem; }
-  .local-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; line-height: 1.3; }
-  .local-rubro { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 1rem; }
-
-  .local-attrs { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.4rem; }
-  .attr-row { display: flex; justify-content: space-between; font-size: 0.82rem; border-bottom: 1px solid var(--border); padding-bottom: 0.45rem; }
-  .attr-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .attr-key { color: var(--muted); }
-  .attr-val { font-weight: 500; color: var(--white); }
-
-  .local-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
-  .local-tag { font-size: 0.72rem; font-family: 'Syne', sans-serif; font-weight: 600; letter-spacing: 0.05em; padding: 0.2rem 0.65rem; border-radius: 100px; background: rgba(255,255,255,0.05); color: rgba(245,242,236,0.5); border: 1px solid var(--border); }
-
-  .local-cta { width: 100%; padding: 0.7rem; border-radius: 10px; border: 1px solid rgba(207,39,142,0.35); background: transparent; color: var(--accent); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
-  .local-cta:hover { background: var(--accent); color: var(--white); }
-  .local-cta:disabled { border-color: var(--border); color: var(--muted); cursor: not-allowed; }
-  .local-cta:disabled:hover { background: transparent; color: var(--muted); }
-
-  /* TOUR */
-  .tour-wrapper { margin-top: 3rem; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
-  .tour-iframe-wrap { position: relative; width: 100%; padding-bottom: 52%; background: #0a0a0a; }
-  .tour-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; cursor: pointer; transition: background 0.3s; }
-  .tour-placeholder:hover { background: rgba(207,39,142,0.04); }
-  .tour-icon-wrap { width: 72px; height: 72px; border-radius: 50%; background: rgba(207,39,142,0.12); border: 1px solid rgba(207,39,142,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; transition: background 0.3s; }
-  .tour-placeholder:hover .tour-icon-wrap { background: rgba(207,39,142,0.22); }
-  .tour-icon-wrap svg { width: 32px; height: 32px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .tour-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); }
-  .tour-sublabel { font-size: 0.82rem; color: var(--muted); }
-  .tour-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
-  .tour-thumb { padding: 1.2rem; border-right: 1px solid var(--border); cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 0.75rem; }
-  .tour-thumb:last-child { border-right: none; }
-  .tour-thumb:hover { background: rgba(207,39,142,0.06); }
-  .tour-thumb.active { background: rgba(207,39,142,0.08); }
-  .tour-thumb-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(207,39,142,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .tour-thumb-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .tour-thumb-label { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.8rem; }
-  .tour-thumb-sub { font-size: 0.72rem; color: var(--muted); }
-
-  /* INQUILINOS */
-  .inquilinos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
-  .inquilino-card { background: var(--card-bg); border-radius: 20px; padding: 2.2rem; border: 1px solid var(--border); position: relative; overflow: hidden; transition: border-color 0.3s; }
-  .inquilino-card:hover { border-color: rgba(207,39,142,0.3); }
-  .inquilino-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); opacity: 0; transition: opacity 0.3s; }
-  .inquilino-card:hover::before { opacity: 1; }
-  .inq-icon { width: 52px; height: 52px; border-radius: 14px; background: rgba(207,39,142,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
-  .inq-icon svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .inq-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
-  .inq-desc { font-size: 0.88rem; color: rgba(245,242,236,0.5); line-height: 1.7; margin-bottom: 1.4rem; }
-  .inq-link { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
-  .inq-link:hover { gap: 0.7rem; }
-
-  /* CONTACTO */
-  .contacto-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; max-width: 1100px; margin: 0 auto; }
-  .contacto-left .checklist { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
-  .contacto-left .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: rgba(245,242,236,0.75); }
-  .check-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(207,39,142,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-  .check-icon svg { width: 11px; height: 11px; stroke: var(--accent); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
-  .urgencia-bar { margin-top: 2rem; background: var(--card-bg); border-radius: 12px; padding: 1.2rem 1.5rem; border: 1px solid var(--border); }
-  .urgencia-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.7rem; display: flex; justify-content: space-between; }
-  .urgencia-label span { color: var(--accent); font-weight: 600; }
-  .progress-bar { height: 6px; background: rgba(255,255,255,0.07); border-radius: 100px; overflow: hidden; }
-  .progress-fill { height: 100%; width: 73%; background: var(--accent); border-radius: 100px; }
-
-  .form-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; }
-  .form-eyebrow { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
-  .form-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 1.8rem; }
-  .form-group { margin-bottom: 1.1rem; }
-  .form-group label { display: block; font-size: 0.8rem; font-weight: 500; color: rgba(245,242,236,0.55); margin-bottom: 0.45rem; letter-spacing: 0.02em; }
-  .form-group input, .form-group select, .form-group textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 0.75rem 1rem; outline: none; transition: border-color 0.2s; appearance: none; resize: none; }
-  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(245,242,236,0.22); }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: rgba(207,39,142,0.45); }
-  .form-group select option { background: #1a1a1a; color: var(--white); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-submit { width: 100%; background: var(--accent); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; padding: 0.95rem; border-radius: 10px; border: none; cursor: pointer; margin-top: 0.6rem; transition: opacity 0.2s, transform 0.2s; }
-  .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
-  .form-note { text-align: center; font-size: 0.75rem; color: rgba(245,242,236,0.28); margin-top: 1rem; }
-
-  .success-msg { display: none; text-align: center; padding: 1rem 0; }
-  .success-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(207,39,142,0.15); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; }
-  .success-icon svg { width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .success-msg h3 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 0.5rem; }
-  .success-msg p { font-size: 0.88rem; color: rgba(245,242,236,0.5); line-height: 1.6; }
-
-  /* UBICACION */
-  .ubicacion-row { display: flex; gap: 3rem; align-items: flex-start; margin-top: 3rem; flex-wrap: wrap; }
-  .ubicacion-info { flex: 1; min-width: 260px; }
-  .ubicacion-info p { font-size: 1rem; color: rgba(245,242,236,0.6); line-height: 1.7; }
-  .ubicacion-info strong { color: var(--white); }
-  .ubicacion-detail { display: flex; align-items: flex-start; gap: 0.75rem; margin-top: 1.5rem; }
-  .ubicacion-detail svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 2px; }
-  .ubicacion-detail p { font-size: 0.88rem; color: rgba(245,242,236,0.55); }
-  .map-placeholder { flex: 1.2; min-width: 300px; min-height: 240px; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: rgba(245,242,236,0.25); font-size: 0.85rem; }
-  .map-placeholder svg { width: 32px; height: 32px; stroke: rgba(207,39,142,0.3); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* FOOTER */
-  footer { border-top: 1px solid var(--border); padding: 2.5rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: -0.02em; color: var(--white); }
-  .footer-logo span { color: var(--accent); }
-  footer p { font-size: 0.8rem; color: rgba(245,242,236,0.3); }
-
-  /* MODAL */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 200; align-items: center; justify-content: center; padding: 5%; backdrop-filter: blur(6px); }
-  .modal-overlay.open { display: flex; }
-  .modal { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; max-width: 520px; width: 100%; position: relative; animation: fadeUp 0.3s ease both; }
-  .modal-close { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(255,255,255,0.06); border: none; color: var(--white); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-  .modal-close:hover { background: rgba(255,255,255,0.12); }
-  .modal-eyebrow { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-  .modal-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
-
-  /* CARRUSEL */
-  .carrusel {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    background: var(--black);
-    margin-top: 64px; /* altura de nav */
-  }
-
-  .carrusel-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-  }
-
-  .carrusel-slide {
-    min-width: 100%;
-    height: 520px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .carrusel-slide .slide-bg {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .slide-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(13,13,13,0.82) 0%, rgba(13,13,13,0.55) 50%, rgba(13,13,13,0.25) 100%);
-  }
-
-  /* Slides con imagen — ya no necesitan fondos individuales */
-  .slide-1 .slide-bg, .slide-2 .slide-bg,
-  .slide-3 .slide-bg, .slide-4 .slide-bg { background: var(--black); }
-
-  .slide-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 7%;
-    max-width: 700px;
-  }
-
-  .slide-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.2rem;
-    border: 1px solid rgba(207,39,142,0.3);
-    padding: 0.35rem 0.9rem;
-    border-radius: 100px;
-    background: rgba(207,39,142,0.07);
-  }
-
-  .slide-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  .slide-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(1.8rem, 4vw, 3.2rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-    color: var(--white);
-  }
-  .slide-title em { font-style: normal; color: var(--accent); }
-
-  .slide-desc {
-    font-size: 1rem;
-    font-weight: 300;
-    color: rgba(245,242,236,0.6);
-    line-height: 1.65;
-    max-width: 460px;
-    margin-bottom: 1.8rem;
-  }
-
-  .slide-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--accent);
-    color: var(--white);
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 0.75rem 1.8rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: opacity 0.2s, transform 0.2s;
-    box-shadow: 0 0 30px rgba(207,39,142,0.3);
-  }
-  .slide-cta:hover { opacity: 0.88; transform: translateY(-1px); }
-
-  /* Controles */
-  .carrusel-prev,
-  .carrusel-next {
-    position: absolute;
-    top: 50%; transform: translateY(-50%);
-    z-index: 10;
-    background: rgba(13,13,13,0.6);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--white);
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-    backdrop-filter: blur(8px);
-  }
-  .carrusel-prev:hover,
-  .carrusel-next:hover { background: rgba(207,39,142,0.3); border-color: rgba(207,39,142,0.5); }
-  .carrusel-prev { left: 1.5rem; }
-  .carrusel-next { right: 1.5rem; }
-  .carrusel-prev svg, .carrusel-next svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* Dots */
-  .carrusel-dots {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.5rem;
-    z-index: 10;
-  }
-  .carrusel-dot {
-    width: 6px; height: 6px;
-    border-radius: 100px;
-    background: rgba(255,255,255,0.25);
-    cursor: pointer;
-    transition: background 0.3s, width 0.3s;
-    border: none;
-  }
-  .carrusel-dot.active { background: var(--accent); width: 22px; }
-
-  /* Ajuste hero para que no tenga margin-top doble */
-  .hero { margin-top: 0; padding-top: 6rem; min-height: calc(100vh - 64px); }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
-  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-  .hero h1 { animation: fadeUp 0.6s 0.1s ease both; }
-  .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
-  .hero-badge { animation: fadeUp 0.6s 0.4s ease both; }
-
-  @media (max-width: 960px) {
-    .propuesta-grid { grid-template-columns: 1fr; }
-    .locales-grid { grid-template-columns: 1fr 1fr; }
-    .inquilinos-grid { grid-template-columns: 1fr; }
-    .contacto-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
-    .tour-grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 640px) {
-    nav { padding: 1rem 5%; }
-    .hero { padding: 9rem 5% 5rem; }
-    section { padding: 4rem 5%; }
-    .locales-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .form-card { padding: 1.8rem; }
-  }
+/* ─── UTILS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.in{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
@@ -624,598 +376,501 @@
 <nav>
   <a href="#" class="nav-logo">Biit<span>Hall</span></a>
   <div class="nav-links">
-    <a href="#locales">Locales</a>
-    <a href="#tour">Tour 360°</a>
-    <a href="#inquilinos">Inquilinos</a>
-    <a href="#contacto" class="nav-cta">Lista de espera</a>
+    <a href="#quienes-somos">Nosotros</a>
+    <a href="#comunidad">Comunidad</a>
+    <a href="#donde">Ubicación</a>
+    <a href="#sumate">Locales</a>
+    <a href="#contacto">Contacto</a>
+    <a href="biithall-academy.html" class="nav-academy">Academy →</a>
+  </div>
+  <div class="nav-burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
-<!-- CARRUSEL -->
-<div class="carrusel" id="carrusel">
-  <div class="carrusel-track" id="carrusel-track">
+<!-- HERO CARRUSEL -->
+<div class="hero-carousel" id="carousel">
+  <div class="carousel-track" id="carousel-track">
 
-    <!-- Slide 1 -->
-    <div class="carrusel-slide slide-1">
-      <div class="slide-bg">
-        <img src= bitt.hall.png style="width:100%;height:100%;object-fit:cover;">
-        
-      </div>
-      <div class="slide-content">
-              </div>
-    </div>
-
-    <!-- Slide 2 -->
-    <div class="carrusel-slide slide-2">
-      <div class="slide-bg">
-        <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/Yle6P7JP42tlxy85/bannner-AzGDXMxz5qhkRB58.png" alt="BiitHall banner locales" style="width:100%;height:100%;object-fit:cover;opacity:0.55;">
-        <div class="slide-overlay"></div>
-      </div>
-      <div class="slide-content">
-        <div class="slide-tag">Disponibilidad</div>
-        <h2 class="slide-title">5 locales<br><em>disponibles</em><br>ahora mismo</h2>
-        <p class="slide-desc">Desde 12 m² hasta 45 m² de doble altura. Espacios listos para personalizar y abrir en tiempo récord.</p>
-        <a href="#contacto" class="slide-cta">Anotarme en lista de espera <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+    <div class="carousel-slide">
+      <img class="slide-img" src="bitt.hall.png" alt="BiitHall paseo">
+      <div class="slide-overlay"></div>
+      <div class="slide-body">
+        <div class="slide-kicker">Paseo Comercial · La Plata</div>
+        <h1 class="slide-h1">Donde la <em>innovación</em><br>tiene una dirección</h1>
+        <p class="slide-p">BiitHall es el punto de encuentro de emprendedores, tecnología y cultura en el corazón de La Plata.</p>
+        <div class="slide-actions">
+          <a href="#quienes-somos" class="btn-fill">Conocer nuestra historia</a>
+          <a href="#sumate" class="btn-ghost-w">Ver locales</a>
+        </div>
       </div>
     </div>
 
-    <!-- Slide 3 -->
-    <div class="carrusel-slide slide-3">
-      <div class="slide-bg">
-        <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/Yle6P7JP42tlxy85/bannner2-A3Qr2lgOK7sENWy1.png" alt="BiitHall comunidad emprendedores" style="width:100%;height:100%;object-fit:cover;opacity:0.55;">
-        <div class="slide-overlay"></div>
-      </div>
-      <div class="slide-content">
-        <div class="slide-tag">Comunidad</div>
-        <h2 class="slide-title">Más que un local,<br>una <em>red de<br>negocios reales</em></h2>
-        <p class="slide-desc">Cada inquilino potencia a los demás. Eventos conjuntos, colaboraciones y visibilidad digital incluida para todos.</p>
-        <a href="#propuesta" class="slide-cta">Conocer la propuesta <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+    <div class="carousel-slide">
+      <img class="slide-img" src="banner2.png" alt="BiitHall locales">
+      <div class="slide-overlay"></div>
+      <div class="slide-body">
+        <div class="slide-kicker">Comunidad</div>
+        <h1 class="slide-h1">Marcas que ya<br>son parte de<br><em>BiitHall</em></h1>
+        <p class="slide-p">Apple, Havanna, Cinema Rocha y más. Un ecosistema de negocios reales en el centro platense.</p>
+        <div class="slide-actions">
+          <a href="#comunidad" class="btn-fill">Ver comunidad</a>
+        </div>
       </div>
     </div>
 
-    <!-- Slide 4 -->
-    <div class="carrusel-slide slide-4">
-      <div class="slide-bg">
-        <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/Yle6P7JP42tlxy85/bannner3-A85re9g1l5sR3kBo.png" alt="BiitHall espacio innovación" style="width:100%;height:100%;object-fit:cover;opacity:0.55;">
-        <div class="slide-overlay"></div>
+    <div class="carousel-slide">
+      <img class="slide-img" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/Yle6P7JP42tlxy85/bannner2-A3Qr2lgOK7sENWy1.png" alt="BiitHall espacio">
+      <div class="slide-overlay"></div>
+      <div class="slide-body">
+        <div class="slide-kicker">Locales disponibles</div>
+        <h1 class="slide-h1">Tu negocio<br>merece el <em>mejor</em><br>espacio</h1>
+        <p class="slide-p">Sumá tu marca a la comunidad. Locales de 12 a 45 m² en el corazón de La Plata.</p>
+        <div class="slide-actions">
+          <a href="#sumate" class="btn-fill">Ver disponibilidad</a>
+          <a href="#contacto" class="btn-ghost-w">Consultar</a>
+        </div>
       </div>
-      <div class="slide-content">
-        <div class="slide-tag">Tour virtual</div>
-        <h2 class="slide-title">Recorrelo antes<br>de <em>venir</em><br>en persona</h2>
-        <p class="slide-desc">Explorá cada rincón de BiitHall en nuestro tour 360°. Visualizá tu local antes de firmar.</p>
-        <a href="#tour" class="slide-cta">Ver tour 360° <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
+    </div>
+
+    <div class="carousel-slide">
+      <img class="slide-img" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/Yle6P7JP42tlxy85/bannner3-A85re9g1l5sR3kBo.png" alt="BiitHall academy">
+      <div class="slide-overlay"></div>
+      <div class="slide-body">
+        <div class="slide-kicker">BiitHall Academy</div>
+        <h1 class="slide-h1">Formación para<br>emprendedores<br><em>de verdad</em></h1>
+        <p class="slide-p">Programa semipresencial con herramientas prácticas para impulsar tu negocio. Abierto a locatarios y externos.</p>
+        <div class="slide-actions">
+          <a href="biithall-academy.html" class="btn-fill">Reservar clase gratuita</a>
+        </div>
       </div>
     </div>
 
   </div>
 
-  <button class="carrusel-prev" onclick="moverCarrusel(-1)" aria-label="Anterior">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <button class="carrusel-next" onclick="moverCarrusel(1)" aria-label="Siguiente">
-    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
-  </button>
-
-  <div class="carrusel-dots" id="carrusel-dots">
-    <button class="carrusel-dot active" onclick="irASlide(0)"></button>
-    <button class="carrusel-dot" onclick="irASlide(1)"></button>
-    <button class="carrusel-dot" onclick="irASlide(2)"></button>
-    <button class="carrusel-dot" onclick="irASlide(3)"></button>
+  <button class="carousel-prev" onclick="moveCarousel(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="carousel-next" onclick="moveCarousel(1)"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+  <div class="carousel-dots" id="carousel-dots">
+    <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+    <button class="carousel-dot" onclick="goToSlide(1)"></button>
+    <button class="carousel-dot" onclick="goToSlide(2)"></button>
+    <button class="carousel-dot" onclick="goToSlide(3)"></button>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-hint-line"></div>
+    <span>Scroll</span>
   </div>
 </div>
-
-<!-- HERO -->
-<section class="hero" id="inicio">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-bg-glow"></div>
-
-  <p class="hero-eyebrow">Paseo Comercial · La Plata</p>
-  <h1>El lugar donde los<br><em>emprendedores</em><br>construyen marca</h1>
-  <p class="hero-sub">BiitHall es el paseo comercial de nueva generación en La Plata. Locales para negocios innovadores, con comunidad real, tráfico constante y visibilidad en el centro de la ciudad.</p>
-
-  <div class="hero-actions">
-    <a href="#contacto" class="btn-primary">Quiero un local</a>
-    <a href="#locales" class="btn-outline">Ver disponibilidad</a>
-  </div>
-
-  <div class="hero-badge">
-    <div class="hero-stat"><strong>18</strong><span>Locales en total</span></div>
-    <div class="hero-divider"></div>
-    <div class="hero-stat"><strong>5</strong><span>Disponibles hoy</span></div>
-    <div class="hero-divider"></div>
-    <div class="hero-stat"><strong>100%</strong><span>Emprendedores</span></div>
-    <div class="hero-divider"></div>
-    <div class="hero-stat"><strong>Centro</strong><span>La Plata</span></div>
-  </div>
-</section>
 
 <!-- TICKER -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-inner">
-    <span>Gastronomía</span><span>·</span><span>Indumentaria</span><span>·</span><span>Tecnología</span><span>·</span><span>Diseño y arte</span><span>·</span><span>Cosmética</span><span>·</span><span>Decoración</span><span>·</span><span>Servicios creativos</span><span>·</span><span>Salud y bienestar</span><span>·</span><span>Fotografía</span><span>·</span>
-    <span>Gastronomía</span><span>·</span><span>Indumentaria</span><span>·</span><span>Tecnología</span><span>·</span><span>Diseño y arte</span><span>·</span><span>Cosmética</span><span>·</span><span>Decoración</span><span>·</span><span>Servicios creativos</span><span>·</span><span>Salud y bienestar</span><span>·</span><span>Fotografía</span><span>·</span>
-  </div>
-</div>
+<div class="ticker"><div class="ticker-inner">
+  <span>Tecnología</span><span>·</span><span>Arte</span><span>·</span><span>Gastronomía</span><span>·</span><span>Innovación</span><span>·</span><span>Criptomonedas</span><span>·</span><span>Cine</span><span>·</span><span>Emprendimiento</span><span>·</span><span>Cultura</span><span>·</span><span>La Plata</span><span>·</span>
+  <span>Tecnología</span><span>·</span><span>Arte</span><span>·</span><span>Gastronomía</span><span>·</span><span>Innovación</span><span>·</span><span>Criptomonedas</span><span>·</span><span>Cine</span><span>·</span><span>Emprendimiento</span><span>·</span><span>Cultura</span><span>·</span><span>La Plata</span><span>·</span>
+</div></div>
 
-<!-- PROPUESTA -->
-<section id="propuesta">
-  <p class="section-label">Por qué BiitHall</p>
-  <h2 class="section-title">Un paseo pensado para<br>negocios que crecen</h2>
-  <p class="section-sub">No es una galería tradicional. Es un ecosistema donde cada local potencia a los demás.</p>
+<!-- ═══ QUIÉNES SOMOS (SCROLLYTELLING) ═══ -->
+<section id="quienes-somos" class="story-section">
 
-  <div class="propuesta-grid">
-    <div class="prop-card">
-      <div class="prop-number">01</div>
-      <div class="prop-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <h3 class="prop-title">Comunidad de emprendedores</h3>
-      <p class="prop-desc">Todos los locales son proyectos genuinos. El tráfico que genera un local beneficia a los demás. Una red de negocios reales bajo el mismo techo.</p>
-    </div>
-    <div class="prop-card">
-      <div class="prop-number">02</div>
-      <div class="prop-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <h3 class="prop-title">Espacios a medida</h3>
-      <p class="prop-desc">Desde locales de 12 m² hasta plantas de 45 m². Ambientes con identidad propia, listos para personalizar y abrir en tiempo récord.</p>
-    </div>
-    <div class="prop-card">
-      <div class="prop-number">03</div>
-      <div class="prop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <h3 class="prop-title">Visibilidad digital incluida</h3>
-      <p class="prop-desc">Cada inquilino tiene presencia en la web y redes de BiitHall. Tu local visible también online, sin costo adicional.</p>
-    </div>
-    <div class="prop-card">
-      <div class="prop-number">04</div>
-      <div class="prop-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <h3 class="prop-title">Ubicación estratégica</h3>
-      <p class="prop-desc">En pleno centro de La Plata, con alto tráfico peatonal, acceso en transporte público y estacionamiento cercano. Donde la gente ya pasa.</p>
+  <div class="story-outer">
+    <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400vh" id="story-grid">
+
+      <!-- Visual sticky -->
+      <div class="story-visual" id="story-visual">
+        <div class="story-visual-inner">
+          <img class="story-img active" id="si-0" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=960,fit=crop/Yle6P7JP42tlxy85/fondoweb-mP4N6bM0gzU6R5V6.png" alt="BiitHall origen">
+          <img class="story-img" id="si-1" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=960,fit=crop/Yle6P7JP42tlxy85/mesa-de-trabajo-2-AMqp188oZlSl3VpW.png" alt="BiitHall espacio">
+          <img class="story-img" id="si-2" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=960,fit=crop/Yle6P7JP42tlxy85/ubicacion2-AMqp18JPnJHE2aJy.jpg" alt="BiitHall ubicación">
+          <img class="story-img" id="si-3" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=960,fit=crop/Yle6P7JP42tlxy85/bannner3-A85re9g1l5sR3kBo.png" alt="BiitHall hoy">
+          <div class="story-img-overlay"></div>
+          <div class="story-counter" id="story-counter">01</div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="story-steps" id="story-steps">
+
+        <div class="story-step visible" data-step="0">
+          <p class="step-year">El sueño · 2022</p>
+          <h2 class="step-h2">Un espacio en blanco<br>lleno de <em>posibilidades</em></h2>
+          <p class="step-p">El ex Paseo Rocha, en el centro de La Plata, llevaba años aguardando una nueva identidad. Sebastián Nill, emprendedor y referente del mundo cripto, vio en ese espacio algo que pocos veían: el futuro.</p>
+          <div class="step-stat">
+            <strong>2022</strong>
+            <span>Inicio de la transformación del Paseo Rocha</span>
+          </div>
+        </div>
+
+        <div class="story-step" data-step="1">
+          <p class="step-year">La visión · 2023</p>
+          <h2 class="step-h2">Business, Intelligence,<br>Innovation & <em>Technology</em></h2>
+          <p class="step-p">Así nació BIIT HALL. Más que un paseo comercial, un hub donde la tecnología, el arte NFT, el cine, la gastronomía y el emprendimiento conviven bajo el mismo techo. Cada local, un proyecto de innovación.</p>
+          <div class="step-stat">
+            <strong>5</strong>
+            <span>Primeros locales inaugurados en 2023</span>
+          </div>
+        </div>
+
+        <div class="story-step" data-step="2">
+          <p class="step-year">La ubicación · Centro</p>
+          <h2 class="step-h2">En el <em>corazón</em><br>de La Plata</h2>
+          <p class="step-p">Calle 49 entre 7 y 8. Acceso por calle 48 y calle 49. Un punto estratégico con alto tráfico peatonal, accesible desde cualquier parte de la ciudad y rodeado de actividad permanente.</p>
+          <div class="step-stat">
+            <strong>2 accesos</strong>
+            <span>Calles 48 y 49, pleno centro platense</span>
+          </div>
+        </div>
+
+        <div class="story-step" data-step="3">
+          <p class="step-year">Hoy · 2025</p>
+          <h2 class="step-h2">Una comunidad<br>que <em>crece</em></h2>
+          <p class="step-p">BiitHall es hoy un ecosistema vivo. Marcas icónicas, emprendedores locales, simuladores, arte y formación. Y todavía hay lugar para quienes quieren ser parte de algo diferente.</p>
+          <div class="step-stat">
+            <strong>18 locales</strong>
+            <span>Tecnología · Arte · Cultura · Gastronomía</span>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
 
-<!-- LOCALES -->
-<section id="locales" style="background: var(--mid);">
-  <div class="locales-header">
+<!-- ═══ COMUNIDAD ACTUAL ═══ -->
+<section id="comunidad" class="comunidad-section">
+  <p class="section-kicker fade-up">Comunidad actual</p>
+  <h2 class="section-h2 fade-up">Las marcas que ya<br>son BiitHall</h2>
+  <p class="section-sub fade-up">Cada local es un proyecto innovador. Juntos forman un destino único en La Plata.</p>
+
+  <div class="comunidad-grid">
+
+    <a href="https://www.apple.com/ar/" target="_blank" rel="noopener" class="comunidad-card fade-up">
+      <div class="comunidad-card-img-ph" style="background:#f5f5f7">
+        <svg width="48" height="48" viewBox="0 0 814 1000" fill="#1d1d1f" xmlns="http://www.w3.org/2000/svg"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 389.8 17 234.7 17 218.6c0-79.2 36.5-121.9 105-181C186.3 3.6 254.1 0 259.5 0c73.5 0 136.9 45.1 181.1 45.1 42.1 0 114.5-47.6 196.8-47.6 31.3 0 127.7 3.2 193.5 111.1zm-182.6-78c-5.6-24.3-17.4-67.1-48-108.2-30.6-41.1-73.5-70.2-116.5-70.2-1.6 0-3.2.1-4.8.1 1.6 26 11.3 69.2 42.1 112 30.8 42.8 73.7 70.8 127.2 66.3z"/></svg>
+      </div>
+      <div class="comunidad-card-body">
+        <p class="cc-rubro">Tecnología</p>
+        <h3 class="cc-name">Apple Store</h3>
+        <p class="cc-desc">Lo último de Apple disponible en La Plata. Productos, accesorios y asesoramiento especializado.</p>
+        <span class="cc-link">Visitar sitio <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></span>
+      </div>
+    </a>
+
+    <a href="https://www.havanna.com.ar/" target="_blank" rel="noopener" class="comunidad-card fade-up">
+      <div class="comunidad-card-img-ph" style="background:#f9f0e3">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8b5e3c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <div class="comunidad-card-body">
+        <p class="cc-rubro">Gastronomía</p>
+        <h3 class="cc-name">Havanna</h3>
+        <p class="cc-desc">La icónica marca argentina de alfajores y cafetería, presente en BiitHall con su propuesta gourmet.</p>
+        <span class="cc-link">Visitar sitio <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></span>
+      </div>
+    </a>
+
+    <a href="https://www.cinemasrocha.com.ar/" target="_blank" rel="noopener" class="comunidad-card fade-up">
+      <div class="comunidad-card-img-ph" style="background:#0d0d1a">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#cf278e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="2" y1="17" x2="7" y2="17"/></svg>
+      </div>
+      <div class="comunidad-card-body">
+        <p class="cc-rubro">Cultura · Entretenimiento</p>
+        <h3 class="cc-name">Cinema Rocha</h3>
+        <p class="cc-desc">Sala de cine independiente en el primer piso de BiitHall. Ciclos de cine, eventos y proyecciones especiales.</p>
+        <span class="cc-link">Visitar sitio <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══ DONDE ESTAMOS ═══ -->
+<section id="donde" class="donde-section">
+  <p class="section-kicker fade-up" style="color:var(--accent)">Dónde estamos</p>
+  <h2 class="section-h2 fade-up" style="color:var(--paper)">En el centro<br>de La Plata</h2>
+
+  <div class="donde-wrapper">
+    <div class="donde-info fade-up">
+      <p style="font-size:1rem;color:rgba(247,243,238,.6);line-height:1.75;max-width:380px">BiitHall ocupa el histórico <strong style="color:var(--paper)">ex Paseo Rocha</strong>, a metros de las diagonales y con acceso directo desde dos calles del microcentro platense.</p>
+
+      <div class="donde-detail">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div class="donde-detail-text">
+          <strong>Calle 49 N° 621</strong>
+          <span>Entre calles 7 y 8 · La Plata, Buenos Aires</span>
+        </div>
+      </div>
+
+      <div class="donde-detail">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="donde-detail-text">
+          <strong>Lunes a Sábado · 9 a 21 hs</strong>
+          <span>Abierto al público general</span>
+        </div>
+      </div>
+
+      <div class="donde-detail">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div class="donde-detail-text">
+          <strong>(221) 000-0000</strong>
+          <span>Consultas comerciales por WhatsApp</span>
+        </div>
+      </div>
+
+      <p class="accesos-title">Accesos al paseo</p>
+      <div>
+        <span class="acceso-badge">↑ Entrada · Calle 48</span>
+        <span class="acceso-badge">↓ Salida · Calle 49</span>
+      </div>
+
+      <div style="margin-top:2rem">
+        <a href="https://maps.google.com/?q=Calle+49+621+La+Plata+Buenos+Aires" target="_blank" class="btn-fill" style="display:inline-flex;align-items:center;gap:.5rem;font-size:.88rem;padding:.75rem 1.6rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Abrir en Google Maps
+        </a>
+      </div>
+    </div>
+
+    <div class="mapa-wrap fade-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.7!2d-57.9518!3d-34.9215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a2e62cb0e2d76d%3A0x1!2sCalle+49+621%2C+La+Plata%2C+Buenos+Aires!5e0!3m2!1ses!2sar!4v1"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación BiitHall La Plata">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SUMATE A LA COMUNIDAD ═══ -->
+<section id="sumate" class="sumate-section">
+  <p class="section-kicker fade-up">Sumate a la comunidad</p>
+  <h2 class="section-h2 fade-up">Tu negocio tiene<br>lugar en BiitHall</h2>
+  <p class="section-sub fade-up">Locales disponibles, servicios incluidos y una comunidad que te potencia desde el día uno.</p>
+
+  <div class="sumate-top">
+
+    <!-- Servicios + disponibilidad -->
     <div>
-      <p class="section-label">Disponibilidad</p>
-      <h2 class="section-title">Locales en BiitHall</h2>
-    </div>
-    <div class="disponibilidad-badge">
-      <div class="dot-live"></div>
-      5 locales disponibles ahora
-    </div>
-  </div>
-
-  <div class="locales-grid">
-
-    <div class="local-card">
-      <div class="local-header">
-        <span class="local-num">Local 01</span>
-        <span class="badge-disponible badge-libre">Disponible</span>
-      </div>
-      <div class="local-body">
-        <h3 class="local-title">Planta esquina · Nivel 0</h3>
-        <p class="local-rubro">Gastronomía / Cafetería</p>
-        <div class="local-attrs">
-          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">38 m²</span></div>
-          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">6,5 m</span></div>
-          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">3,2 m</span></div>
-          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Gas + ventilación</span></div>
+      <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:var(--ink);margin-bottom:1.2rem">Servicios incluidos</p>
+      <div class="servicios-grid fade-up">
+        <div class="servicio-card">
+          <div class="serv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <p class="serv-name">Visibilidad digital</p>
+          <p class="serv-desc">Presencia en la web y redes de BiitHall incluida para todos los inquilinos.</p>
         </div>
-        <div class="local-tags">
-          <span class="local-tag">Esquina</span><span class="local-tag">Ventana al paseo</span><span class="local-tag">Gas industrial</span><span class="local-tag">Alta visibilidad</span>
+        <div class="servicio-card">
+          <div class="serv-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <p class="serv-name">Red de inquilinos</p>
+          <p class="serv-desc">Eventos conjuntos, colaboraciones y comunidad activa de emprendedores.</p>
         </div>
-        <button class="local-cta" onclick="openModal('Local 01 — Esquina Nivel 0', '38 m²')">Consultar disponibilidad</button>
+        <div class="servicio-card">
+          <div class="serv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <p class="serv-name">Tráfico garantizado</p>
+          <p class="serv-desc">Alto flujo peatonal en el centro de La Plata, todo el año.</p>
+        </div>
+        <div class="servicio-card">
+          <div class="serv-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <p class="serv-name">Soporte técnico</p>
+          <p class="serv-desc">Mantenimiento, soporte y comunicación directa con la administración.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem">
+        <div class="disp-header">
+          <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:var(--ink)">Disponibilidad actual</p>
+          <span class="disp-live"><div class="disp-dot"></div>En tiempo real</span>
+        </div>
+        <div class="disp-list fade-up">
+          <div class="disp-item">
+            <div><p class="disp-name">Local 01 · Esquina planta baja</p><p class="disp-meta">38 m² · Gas + ventilación · Alta visibilidad</p></div>
+            <span class="badge badge-verde">Disponible</span>
+          </div>
+          <div class="disp-item">
+            <div><p class="disp-name">Local 02 · Interior central</p><p class="disp-meta">22 m² · Eléctrica reforzada · LED</p></div>
+            <span class="badge badge-rojo">Ocupado</span>
+          </div>
+          <div class="disp-item">
+            <div><p class="disp-name">Local 03 · Planta alta</p><p class="disp-meta">28 m² · Fibra óptica · Acceso 24hs</p></div>
+            <span class="badge badge-verde">Disponible</span>
+          </div>
+          <div class="disp-item">
+            <div><p class="disp-name">Local 04 · Interior pasillo</p><p class="disp-meta">14 m² · Agua + eléctrica</p></div>
+            <span class="badge badge-naranja">Reservado</span>
+          </div>
+          <div class="disp-item">
+            <div><p class="disp-name">Local 05 · Doble altura premium</p><p class="disp-meta">45 m² · 5,5 m de altura · Marquesina</p></div>
+            <span class="badge badge-verde">Disponible</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="local-card">
-      <div class="local-header">
-        <span class="local-num">Local 02</span>
-        <span class="badge-disponible badge-ocupado">Ocupado</span>
-      </div>
-      <div class="local-body">
-        <h3 class="local-title">Interior central · Nivel 0</h3>
-        <p class="local-rubro">Indumentaria / Accesorios</p>
-        <div class="local-attrs">
-          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">22 m²</span></div>
-          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">4 m</span></div>
-          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
-          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Eléctrica reforzada</span></div>
-        </div>
-        <div class="local-tags">
-          <span class="local-tag">Iluminación LED</span><span class="local-tag">Probadores</span><span class="local-tag">Depósito</span>
-        </div>
-        <button class="local-cta" disabled>Actualmente ocupado</button>
-      </div>
-    </div>
+    <!-- Formulario -->
+    <div class="fade-up">
+      <div class="form-card-light">
+        <p class="form-eyebrow">Consulta de locales</p>
+        <h3 class="form-title">Hablemos de tu proyecto</h3>
 
-    <div class="local-card">
-      <div class="local-header">
-        <span class="local-num">Local 03</span>
-        <span class="badge-disponible badge-libre">Disponible</span>
-      </div>
-      <div class="local-body">
-        <h3 class="local-title">Planta alta · Nivel 1</h3>
-        <p class="local-rubro">Tecnología / Servicios digitales</p>
-        <div class="local-attrs">
-          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">28 m²</span></div>
-          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">4,5 m</span></div>
-          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
-          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Fibra óptica dedicada</span></div>
-        </div>
-        <div class="local-tags">
-          <span class="local-tag">Internet gigabit</span><span class="local-tag">Sala de reuniones</span><span class="local-tag">Acceso 24hs</span>
-        </div>
-        <button class="local-cta" onclick="openModal('Local 03 — Planta alta Nivel 1', '28 m²')">Consultar disponibilidad</button>
-      </div>
-    </div>
-
-    <div class="local-card">
-      <div class="local-header">
-        <span class="local-num">Local 04</span>
-        <span class="badge-disponible badge-reservado">Reservado</span>
-      </div>
-      <div class="local-body">
-        <h3 class="local-title">Interior pasillo · Nivel 0</h3>
-        <p class="local-rubro">Cosmética / Bienestar</p>
-        <div class="local-attrs">
-          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">14 m²</span></div>
-          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">3 m</span></div>
-          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
-          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Agua + eléctrica</span></div>
-        </div>
-        <div class="local-tags">
-          <span class="local-tag">Ventilación</span><span class="local-tag">Agua fría/caliente</span><span class="local-tag">Compacto</span>
-        </div>
-        <button class="local-cta" disabled>En proceso de reserva</button>
-      </div>
-    </div>
-
-    <div class="local-card">
-      <div class="local-header">
-        <span class="local-num">Local 05</span>
-        <span class="badge-disponible badge-libre">Disponible</span>
-      </div>
-      <div class="local-body">
-        <h3 class="local-title">Doble altura · Nivel 0–1</h3>
-        <p class="local-rubro">Diseño / Arte / Galería</p>
-        <div class="local-attrs">
-          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">45 m²</span></div>
-          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">7 m</span></div>
-          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">5,5 m (doble)</span></div>
-          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Completas</span></div>
-        </div>
-        <div class="local-tags">
-          <span class="local-tag">Doble altura</span><span class="local-tag">Marquesina</span><span class="local-tag">Mezzanine opcional</span><span class="local-tag">Premium</span>
-        </div>
-        <button class="local-cta" onclick="openModal('Local 05 — Doble altura', '45 m²')">Consultar disponibilidad</button>
-      </div>
-    </div>
-
-    <div class="local-card">
-      <div class="local-header">
-        <span class="local-num">Local 06</span>
-        <span class="badge-disponible badge-libre">Disponible</span>
-      </div>
-      <div class="local-body">
-        <h3 class="local-title">Compacto pasillo · Nivel 1</h3>
-        <p class="local-rubro">Fotografía / Estudio</p>
-        <div class="local-attrs">
-          <div class="attr-row"><span class="attr-key">Superficie</span><span class="attr-val">12 m²</span></div>
-          <div class="attr-row"><span class="attr-key">Frente</span><span class="attr-val">2,8 m</span></div>
-          <div class="attr-row"><span class="attr-key">Altura</span><span class="attr-val">2,8 m</span></div>
-          <div class="attr-row"><span class="attr-key">Instalaciones</span><span class="attr-val">Eléctrica reforzada</span></div>
-        </div>
-        <div class="local-tags">
-          <span class="local-tag">Ideal estudio</span><span class="local-tag">Bajo costo</span><span class="local-tag">Iluminación</span>
-        </div>
-        <button class="local-cta" onclick="openModal('Local 06 — Compacto Nivel 1', '12 m²')">Consultar disponibilidad</button>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- TOUR 360 -->
-<section id="tour" style="background: var(--black);">
-  <p class="section-label">Recorrido virtual</p>
-  <h2 class="section-title">Tour 360° de la galería</h2>
-  <p class="section-sub">Explorá BiitHall desde donde estés antes de venir en persona.</p>
-
-  <div class="tour-wrapper">
-    <div class="tour-iframe-wrap" id="tour-container">
-      <div class="tour-placeholder" id="tour-placeholder" onclick="startTour()">
-        <div class="tour-icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.87v6.26a1 1 0 0 1-1.447.9L15 14"/><rect x="1" y="6" width="15" height="12" rx="2"/></svg>
-        </div>
-        <p class="tour-label">Iniciar recorrido 360°</p>
-        <p class="tour-sublabel">Hacé clic para explorar la galería virtualmente</p>
-      </div>
-    </div>
-    <div class="tour-grid">
-      <div class="tour-thumb active" onclick="setZona(this)">
-        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-        <div><p class="tour-thumb-label">Entrada</p><p class="tour-thumb-sub">Acceso principal</p></div>
-      </div>
-      <div class="tour-thumb" onclick="setZona(this)">
-        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/></svg></div>
-        <div><p class="tour-thumb-label">Pasillo central</p><p class="tour-thumb-sub">Nivel 0</p></div>
-      </div>
-      <div class="tour-thumb" onclick="setZona(this)">
-        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></div>
-        <div><p class="tour-thumb-label">Planta alta</p><p class="tour-thumb-sub">Nivel 1</p></div>
-      </div>
-      <div class="tour-thumb" onclick="setZona(this)">
-        <div class="tour-thumb-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
-        <div><p class="tour-thumb-label">Local ejemplo</p><p class="tour-thumb-sub">Vista interior</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- INQUILINOS -->
-<section id="inquilinos" style="background: var(--mid);">
-  <p class="section-label">Soy inquilino</p>
-  <h2 class="section-title">Todo lo que necesitás<br>como locatario</h2>
-  <p class="section-sub">Accedé a recursos, soporte y la comunidad de BiitHall desde un solo lugar.</p>
-
-  <div class="inquilinos-grid">
-    <div class="inquilino-card">
-      <div class="inq-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-      <h3 class="inq-title">Reglamento y contrato</h3>
-      <p class="inq-desc">Accedé al reglamento interno, condiciones de alquiler, plazos, garantías y todo lo necesario para formalizar tu local en BiitHall.</p>
-      <a href="#contacto" class="inq-link">Solicitar documentación <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
-    </div>
-    <div class="inquilino-card">
-      <div class="inq-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-      <h3 class="inq-title">Panel de inquilino</h3>
-      <p class="inq-desc">Consultá tu estado de cuenta, facturas, fecha de vencimiento y comunicados del administrador desde tu acceso personal.</p>
-      <a href="#contacto" class="inq-link">Acceder al portal <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
-    </div>
-    <div class="inquilino-card">
-      <div class="inq-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-      <h3 class="inq-title">Soporte y mantenimiento</h3>
-      <p class="inq-desc">Reportá incidencias, solicitá mantenimiento o coordiná con el equipo de BiitHall directamente desde WhatsApp o el panel.</p>
-      <a href="#contacto" class="inq-link">Contactar soporte <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
-    </div>
-    <div class="inquilino-card">
-      <div class="inq-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <h3 class="inq-title">Red de inquilinos</h3>
-      <p class="inq-desc">Conectate con el resto de los emprendedores del paseo. Eventos, colaboraciones y actividades conjuntas para hacer crecer todos los negocios.</p>
-      <a href="#contacto" class="inq-link">Unirme a la comunidad <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- LISTA DE ESPERA -->
-<section id="contacto" style="background: var(--black);">
-  <div class="contacto-wrapper">
-    <div class="contacto-left">
-      <p class="section-label">Lista de espera</p>
-      <h2 class="section-title">Reservá tu lugar<br>antes de que salga</h2>
-      <p class="section-sub" style="margin-bottom:0">Los locales disponibles se cubren rápido. Dejá tus datos y te avisamos antes que nadie cuando haya uno que se ajuste a tu proyecto.</p>
-
-      <ul class="checklist">
-        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Te notificamos antes de publicar la vacante</li>
-        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Visita privada al espacio sin compromiso</li>
-        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Asesoramiento personalizado según tu rubro</li>
-        <li><div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Condiciones preferenciales para lista de espera</li>
-      </ul>
-
-      <div class="urgencia-bar">
-        <div class="urgencia-label">
-          <span>Ocupación actual del paseo</span>
-          <span>73% ocupado</span>
-        </div>
-        <div class="progress-bar"><div class="progress-fill"></div></div>
-      </div>
-    </div>
-
-    <div>
-      <div class="form-card">
-        <p class="form-eyebrow">Contacto</p>
-        <h3 class="form-title">Anotate en la lista de espera</h3>
-
-        <form id="form-registro" onsubmit="handleSubmit(event)">
+        <form id="form-sumate" onsubmit="submitSumate(event)">
           <div class="form-row">
             <div class="form-group"><label>Nombre</label><input type="text" placeholder="Tu nombre" required></div>
-            <div class="form-group"><label>Apellido</label><input type="text" placeholder="Tu apellido" required></div>
+            <div class="form-group"><label>Apellido</label><input type="text" placeholder="Tu apellido"></div>
           </div>
           <div class="form-group"><label>Email</label><input type="email" placeholder="nombre@email.com" required></div>
           <div class="form-group"><label>WhatsApp</label><input type="tel" placeholder="221 000 0000"></div>
           <div class="form-row">
             <div class="form-group">
-              <label>Rubro del negocio</label>
-              <select>
-                <option value="" disabled selected>Seleccioná</option>
-                <option>Gastronomía</option>
-                <option>Indumentaria / Moda</option>
-                <option>Tecnología</option>
-                <option>Diseño / Arte</option>
-                <option>Cosmética / Bienestar</option>
-                <option>Servicios creativos</option>
-                <option>Fotografía / Estudio</option>
-                <option>Decoración</option>
-                <option>Otro</option>
-              </select>
+              <label>Rubro</label>
+              <select><option value="" disabled selected>Seleccioná</option><option>Gastronomía</option><option>Tecnología</option><option>Indumentaria</option><option>Arte / Diseño</option><option>Cosmética</option><option>Servicios</option><option>Otro</option></select>
             </div>
             <div class="form-group">
-              <label>Superficie necesaria</label>
-              <select>
-                <option value="" disabled selected>Seleccioná</option>
-                <option>Hasta 15 m²</option>
-                <option>15 – 25 m²</option>
-                <option>25 – 40 m²</option>
-                <option>Más de 40 m²</option>
-                <option>Sin preferencia</option>
-              </select>
+              <label>Superficie</label>
+              <select><option value="" disabled selected>Seleccioná</option><option>Hasta 15 m²</option><option>15 – 30 m²</option><option>30 – 45 m²</option><option>Sin preferencia</option></select>
             </div>
           </div>
-          <div class="form-group">
-            <label>Contanos brevemente tu proyecto (opcional)</label>
-            <textarea rows="3" placeholder="Qué tipo de negocio tenés en mente..."></textarea>
-          </div>
-          <button type="submit" class="form-submit">Anotarme en la lista de espera →</button>
-          <p class="form-note">Sin spam. Solo te contactamos cuando hay novedades relevantes para tu perfil.</p>
+          <div class="form-group"><label>Contanos tu proyecto</label><textarea rows="3" placeholder="¿Qué negocio querés abrir en BiitHall?"></textarea></div>
+          <button type="submit" class="btn-submit-dark">Enviar consulta →</button>
+          <p class="form-note-light">Sin spam. Te respondemos en menos de 24 hs.</p>
         </form>
 
-        <div class="success-msg" id="success-msg">
-          <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <h3>¡Ya estás en la lista!</h3>
-          <p>Te vamos a avisar en cuanto haya un local disponible que se adapte a tu proyecto. Mientras tanto podés escribirnos por WhatsApp.</p>
+        <div class="success-light" id="success-sumate">
+          <div class="success-light-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>¡Consulta recibida!</h3>
+          <p>Te contactamos en breve para hablar de tu proyecto en BiitHall.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ CONTACTO ═══ -->
+<section id="contacto" class="contacto-section">
+  <div class="contacto-wrapper">
+    <div class="contacto-text fade-up">
+      <p class="section-kicker">Contacto</p>
+      <h2 class="section-h2">¿Tenés alguna<br>consulta?</h2>
+      <p class="section-sub">Escribinos por cualquiera de nuestros canales. Estamos para responder.</p>
+
+      <ul class="contacto-list">
+        <li><div class="ci"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Calle 49 N° 621 entre 7 y 8, La Plata</li>
+        <li><div class="ci"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Lunes a Sábado de 9 a 21 hs</li>
+        <li><div class="ci"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>info@biithall.com</li>
+        <li><div class="ci"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>(221) 000-0000 · WhatsApp</li>
+      </ul>
+
+      <div class="rrss-row">
+        <a href="https://www.instagram.com/biit.hall/" target="_blank" class="rrss-btn">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61551752075701" target="_blank" class="rrss-btn">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+        <a href="https://biithall.com" target="_blank" class="rrss-btn">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Web
+        </a>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <div class="contacto-form-card">
+        <p class="cf-eyebrow">Envianos un mensaje</p>
+        <h3 class="cf-title">Escribinos</h3>
+        <form class="cf" id="form-contacto" onsubmit="submitContacto(event)">
+          <input type="text" placeholder="Tu nombre" required>
+          <input type="email" placeholder="Email" required>
+          <select><option value="" disabled selected>Motivo de consulta</option><option>Alquiler de local</option><option>Información general</option><option>Prensa / Medios</option><option>BiitHall Academy</option><option>Otro</option></select>
+          <textarea rows="4" placeholder="Tu mensaje..."></textarea>
+          <button type="submit" class="btn-submit-accent">Enviar mensaje →</button>
+        </form>
+        <div id="success-contacto" style="display:none;text-align:center;padding:1.5rem 0">
+          <div style="width:52px;height:52px;border-radius:50%;background:rgba(207,39,142,.15);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cf278e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--paper);margin-bottom:.4rem">¡Mensaje enviado!</h3>
+          <p style="font-size:.85rem;color:rgba(247,243,238,.5)">Te respondemos pronto.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- UBICACION -->
-<section style="background: var(--mid);">
-  <p class="section-label">Dónde encontrarnos</p>
-  <h2 class="section-title">En el centro de La Plata</h2>
-
-  <div class="ubicacion-row">
-    <div class="ubicacion-info">
-      <p><strong>BiitHall</strong> está ubicado en pleno centro platense, a metros de la diagonal principal. Con alto flujo peatonal durante toda la semana.</p>
-      <div class="ubicacion-detail">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <p><strong>Calle 49 N° 621 entre 7 y 8</strong><br>La Plata, Buenos Aires</p>
-      </div>
-      <div class="ubicacion-detail">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <p>Abierto al público<br><strong>Lunes a sábado, 9 a 21 hs</strong></p>
-      </div>
-      <div class="ubicacion-detail">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <p>Consultas comerciales<br><strong>(221) 000-0000</strong></p>
-      </div>
-    </div>
-    <div class="map-placeholder">
-      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Calle 49 N° 621 · La Plata</span>
-    </div>
+<!-- ═══ ACADEMY BANNER ═══ -->
+<div class="academy-banner">
+  <div class="academy-banner-text">
+    <p class="ab-kicker">Nuevo · BiitHall Academy</p>
+    <h2 class="ab-h2">Formación práctica para<br><em>emprendedores que hacen</em></h2>
+    <p class="ab-p">Programa semipresencial abierto a locatarios y emprendedores externos. Encuentros en BiitHall con herramientas reales para hacer crecer tu negocio.</p>
   </div>
-</section>
+  <a href="biithall-academy.html" class="btn-academy-white">Reservar clase gratuita →</a>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Biit<span>Hall</span></div>
   <p>© 2025 BiitHall · Paseo Comercial · La Plata, Buenos Aires</p>
-  <p style="color:rgba(245,242,236,0.18);font-size:0.75rem;">Innovación · Emprendimiento · Comunidad</p>
+  <p style="color:rgba(247,243,238,.18);font-size:.73rem">Innovación · Emprendimiento · Tecnología</p>
 </footer>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <p class="modal-eyebrow">Consulta de disponibilidad</p>
-    <h3 class="modal-title" id="modal-title">Local disponible</h3>
-    <form onsubmit="submitModal(event)">
-      <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" required></div>
-      <div class="form-group"><label>WhatsApp o email</label><input type="text" placeholder="221 000 0000 / email" required></div>
-      <div class="form-group">
-        <label>¿Cuándo querés visitar el local?</label>
-        <select>
-          <option value="" disabled selected>Elegí una opción</option>
-          <option>Esta semana</option>
-          <option>La semana que viene</option>
-          <option>En los próximos 15 días</option>
-          <option>Solo quiero información por ahora</option>
-        </select>
-      </div>
-      <button type="submit" class="form-submit">Enviar consulta →</button>
-    </form>
-  </div>
-</div>
-
 <script>
-  // CARRUSEL
-  let slideActual = 0;
-  const totalSlides = 4;
-  let autoplay;
+// ── CAROUSEL ──
+let cur = 0;
+const total = 4;
+let autoplay;
+function actualizarCarousel(){
+  document.getElementById('carousel-track').style.transform=`translateX(-${cur*100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+}
+function moveCarousel(d){cur=(cur+d+total)%total;actualizarCarousel();resetAuto()}
+function goToSlide(i){cur=i;actualizarCarousel();resetAuto()}
+function resetAuto(){clearInterval(autoplay);autoplay=setInterval(()=>moveCarousel(1),5500)}
+resetAuto();
+// touch
+let tx=0;
+document.getElementById('carousel').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+document.getElementById('carousel').addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50)moveCarousel(d>0?1:-1)});
 
-  function actualizarCarrusel() {
-    document.getElementById('carrusel-track').style.transform = `translateX(-${slideActual * 100}%)`;
-    document.querySelectorAll('.carrusel-dot').forEach((d, i) => d.classList.toggle('active', i === slideActual));
-  }
+// ── SCROLLYTELLING ──
+const steps = document.querySelectorAll('.story-step');
+const imgs = document.querySelectorAll('.story-img');
+const counter = document.getElementById('story-counter');
+const counters = ['01','02','03','04'];
 
-  function moverCarrusel(dir) {
-    slideActual = (slideActual + dir + totalSlides) % totalSlides;
-    actualizarCarrusel();
-    resetAutoplay();
-  }
-
-  function irASlide(i) {
-    slideActual = i;
-    actualizarCarrusel();
-    resetAutoplay();
-  }
-
-  function resetAutoplay() {
-    clearInterval(autoplay);
-    autoplay = setInterval(() => moverCarrusel(1), 5000);
-  }
-
-  resetAutoplay();
-
-  // Swipe touch
-  let touchStartX = 0;
-  document.getElementById('carrusel').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  document.getElementById('carrusel').addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) moverCarrusel(diff > 0 ? 1 : -1);
+function updateStory(){
+  const vh = window.innerHeight;
+  let activeIdx = 0;
+  steps.forEach((step, i) => {
+    const rect = step.getBoundingClientRect();
+    const mid = rect.top + rect.height/2;
+    if(mid < vh*0.65) activeIdx = i;
+    step.classList.toggle('visible', mid < vh*0.75 && mid > vh*0.1);
   });
+  imgs.forEach((img,i)=>{img.classList.toggle('active',i===activeIdx)});
+  if(counter) counter.textContent = counters[activeIdx]||'01';
+}
+window.addEventListener('scroll',updateStory,{passive:true});
+updateStory();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    document.getElementById('form-registro').style.display = 'none';
-    document.getElementById('success-msg').style.display = 'block';
-  }
+// ── FADE UP on scroll ──
+const faders = document.querySelectorAll('.fade-up');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})
+},{threshold:0.15});
+faders.forEach(f=>obs.observe(f));
 
-  function startTour() {
-    const ph = document.getElementById('tour-placeholder');
-    ph.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:2rem;height:100%;">
-        <div style="width:52px;height:52px;border-radius:50%;background:rgba(207,39,142,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:0.5rem;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#cf278e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        </div>
-        <p style="font-family:Syne,sans-serif;font-weight:700;font-size:0.95rem;color:#F5F2EC;">Tour 360° próximamente</p>
-        <p style="font-size:0.82rem;color:#888;text-align:center;max-width:300px;line-height:1.6;">Estamos preparando el recorrido virtual de BiitHall. Mientras tanto podés visitarnos en persona o coordinamos una visita.</p>
-        <a href="#contacto" style="margin-top:0.8rem;background:#cf278e;color:#fff;font-family:Syne,sans-serif;font-weight:700;font-size:0.85rem;padding:0.65rem 1.5rem;border-radius:100px;text-decoration:none;">Coordinar visita</a>
-      </div>`;
-  }
+// ── FORMS ──
+function submitSumate(e){
+  e.preventDefault();
+  document.getElementById('form-sumate').style.display='none';
+  document.getElementById('success-sumate').style.display='block';
+}
+function submitContacto(e){
+  e.preventDefault();
+  document.getElementById('form-contacto').style.display='none';
+  document.getElementById('success-contacto').style.display='block';
+}
 
-  function setZona(el) {
-    document.querySelectorAll('.tour-thumb').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-  }
-
-  function openModal(nombre, sup) {
-    document.getElementById('modal-title').textContent = nombre + ' · ' + sup;
-    document.getElementById('modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function submitModal(e) {
-    e.preventDefault();
-    document.querySelector('.modal').innerHTML = `
-      <div style="text-align:center;padding:1.5rem 0">
-        <div style="width:56px;height:56px;border-radius:50%;background:rgba(207,39,142,0.15);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#cf278e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3 style="font-family:Syne,sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:0.5rem;">¡Consulta enviada!</h3>
-        <p style="font-size:0.88rem;color:rgba(245,242,236,0.5);line-height:1.6;margin-bottom:1.5rem;">Te contactamos en menos de 24 hs para coordinar la visita.</p>
-        <button onclick="closeModal()" style="background:#cf278e;color:#fff;border:none;font-family:Syne,sans-serif;font-weight:700;padding:0.7rem 1.8rem;border-radius:100px;cursor:pointer;">Cerrar</button>
-      </div>`;
-  }
-
-  document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
+function toggleMenu(){}
 </script>
 </body>
 </html>
